@@ -1,0 +1,12 @@
+{
+	"name": "NanikaStorage",
+	"description": "NanikaStorage - Nanika Storage",
+	"main": "NanikaStorage.js",
+	"ignore": [
+		"**/.*",
+		"bower_components",
+		"node_modules",
+		"npm-debug.log",
+		"coverage"
+	]
+}
