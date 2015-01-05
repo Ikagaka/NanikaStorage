@@ -1,95 +1,176 @@
+Promise = @Promise
+
 class NanikaStorage
-	constructor: (@ghosts={}, @balloons={}) ->
-	ghost: (dirpath, directory) ->
-		unless @ghosts[dirpath]? then throw new Error "ghost not found at [#{dirpath}]"
-		if directory?
-			@ghosts[dirpath] = directory
-		@ghosts[dirpath]
-	balloon: (dirpath, directory) ->
-		unless @balloons[dirpath]? then throw new Error "balloon not found at [#{dirpath}]"
-		if directory?
-			@balloons[dirpath] = directory
-		@balloons[dirpath]
-	ghost_master: (dirpath, directory) ->
-		if directory?
-			@ghost dirpath, @ghost(dirpath).removeElements('ghost/master').addDirectory(directory.wrapDirectory('ghost/master'))
-		ghost = @ghost(dirpath)
-		unless ghost.hasElement('ghost/master') then throw new Error "ghost/master not found at [#{dirpath}]"
-		ghost.getDirectory('ghost/master')
-	shell: (dirpath, shellpath, directory) ->
-		if directory?
-			@ghost dirpath, @ghost(dirpath).removeElements('shell/' + shellpath).addDirectory(directory.wrapDirectory('shell/' + shellpath))
-		ghost = @ghost(dirpath)
-		unless ghost.hasElement('shell/' + shellpath) then throw new Error "shell/#{shellpath} not found at [#{dirpath}]"
-		ghost.getDirectory('shell/' + shellpath)
+	@Backend = {}
+	constructor: (@backend) ->
+	ghost: (dirpath, directory, merge) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.ghost(dirpath, directory, merge)
+	balloon: (dirpath, directory, merge) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.balloon(dirpath, directory, merge)
+	ghost_master: (dirpath, directory, merge) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.ghost_master(dirpath, directory, merge)
+	shell: (dirpath, shellpath, directory, merge) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.shell(dirpath, shellpath, directory, merge)
+	ghosts: ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.ghosts()
+	balloons: ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.balloons()
+	shells: (dirpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.shells(dirpath)
 	ghost_names: ->
-		Object.keys(@ghosts)
-		.map (directory) => @ghosts[directory].install.name
-		.sort()
+		new Promise (resolve) -> resolve()
+		.then => @backend.ghost_names()
 	balloon_names: ->
-		Object.keys(@balloons)
-		.map (directory) => @balloons[directory].install.name
-		.sort()
-	install_nar: (nar, dirpath) ->
-		switch nar.install.type
-			when 'ghost'
-				@install_ghost nar, dirpath
-			when 'balloon'
-				@install_balloon nar, dirpath
-			when 'supplement'
-				@install_supplement nar, dirpath
-			when 'shell'
-				@install_shell nar, dirpath
-			when 'package'
-				@install_package nar, dirpath
+		new Promise (resolve) -> resolve()
+		.then => @backend.balloon_names()
+	shell_names: (dirpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.shell_names(dirpath)
+	ghost_name: (dirpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.ghost_name(dirpath)
+	balloon_name: (dirpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.balloon_name(dirpath)
+	shell_name: (dirpath, shellpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.shell_name(dirpath, shellpath)
+	delete_ghost: (dirpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.delete_ghost(dirpath)
+	delete_balloon: (dirpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.delete_balloon(dirpath)
+	filter_ghost: (dirpath, paths) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.filter_ghost(dirpath, paths)
+	filter_balloon: (dirpath, paths) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.filter_balloon(dirpath, paths)
+	filter_shell: (dirpath, shellpath, paths) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.filter_shell(dirpath, shellpath, paths)
+	merge_ghost: (dirpath, directory) ->
+		install = directory.install || {}
+		if install.refresh
+			if install.refreshundeletemask
+				undelete_elements = install.refreshundeletemask.split /:/
+				@filter_ghost(dirpath, undelete_elements)
+				.then =>
+					@ghost(dirpath, directory, true)
 			else
-				throw new Error 'not supported'
+				@ghost(dirpath, directory, false)
+		else
+			@ghost(dirpath, directory, true)
+	merge_balloon: (dirpath, directory) ->
+		install = directory.install || {}
+		if install.refresh
+			if install.refreshundeletemask
+				undelete_elements = install.refreshundeletemask.split /:/
+				@filter_balloon(dirpath, undelete_elements)
+				.then =>
+					@balloon(dirpath, directory, true)
+			else
+				@balloon(dirpath, directory, false)
+		else
+			@balloon(dirpath, directory, true)
+	merge_shell: (dirpath, shellpath, directory) ->
+		install = directory.install || {}
+		if install.refresh
+			if install.refreshundeletemask
+				undelete_elements = install.refreshundeletemask.split /:/
+				@filter_shell(dirpath, shellpath, undelete_elements)
+				.then =>
+					@shell(dirpath, shellpath, directory, true)
+			else
+				@shell(dirpath, shellpath, directory, false)
+		else
+			@shell(dirpath, shellpath, directory, true)
+	install_nar: (nar, dirpath) ->
+		new Promise (resolve) -> resolve()
+		.then =>
+			switch nar.install.type
+				when 'ghost'
+					@install_ghost nar, dirpath
+				when 'balloon'
+					@install_balloon nar, dirpath
+				when 'supplement'
+					@install_supplement nar, dirpath
+				when 'shell'
+					@install_shell nar, dirpath
+				when 'package'
+					@install_package nar, dirpath
+				else
+					throw new Error 'not supported'
 	install_ghost: (nar, dirpath) ->
-		install = nar.install || {}
-		unless install.directory then throw new Error "install.txt directory entry required"
-		target_directory = install.directory
-		{nar, install_results} = @install_children(nar, dirpath)
-		@ghosts[target_directory] = @merge_directory(@ghosts[target_directory], nar)
-		install_results.push {type: 'ghost', directory: target_directory}
-		return install_results
+		new Promise (resolve) -> resolve()
+		.then =>
+			install = nar.install || {}
+			unless install.directory then throw new Error "install.txt directory entry required"
+			target_directory = install.directory
+			@install_children(nar, dirpath)
+			.then ({nar, install_results}) =>
+				@merge_ghost(target_directory, nar)
+				.then ->
+					install_results.push {type: 'ghost', directory: target_directory}
+					return install_results
 	install_balloon: (nar, dirpath) ->
-		install = nar.install || {}
-		unless install.directory then throw new Error "install.txt directory entry required"
-		target_directory = install.directory
-		install_results = []
-		@balloons[target_directory] = @merge_directory(@balloons[target_directory], nar)
-		install_results.push {type: 'balloon', directory: target_directory}
-		return install_results
+		new Promise (resolve) -> resolve()
+		.then =>
+			install = nar.install || {}
+			unless install.directory then throw new Error "install.txt directory entry required"
+			target_directory = install.directory
+			install_results = []
+			@merge_balloon(target_directory, nar)
+			.then ->
+				install_results.push {type: 'balloon', directory: target_directory}
+				return install_results
 	install_supplement: (nar, dirpath) ->
-		unless dirpath then throw new Error "dirpath required"
-		ghost = @ghost(dirpath)
-		if install.accept? and install.accept != ghost.install.name then return null
-		throw 'not implemented'
+		new Promise (resolve) -> resolve()
+		.then =>
+			unless dirpath then throw new Error "dirpath required"
+			ghost = @ghost(dirpath)
+			if install.accept? and install.accept != ghost.install.name then return null
+			throw 'not implemented'
 	install_shell: (nar, dirpath) ->
-		install = nar.install || {}
-		unless dirpath then throw new Error "dirpath required"
-		unless install.directory then throw new Error "install.txt directory entry required"
-		target_directory = install.directory
-		{nar, install_results} = @install_children(nar, dirpath)
-		ghost = @ghost(dirpath)
-		if install.accept? and install.accept != ghost.install.name then return null
-		shell = ghost.getDirectory('shell/' + target_directory)
-		shell = @merge_directory(shell, nar)
-		shell = shell.wrapDirectory(target_directory).wrapDirectory('shell')
-		@ghosts[dirpath] = @merge_directory(@ghosts[dirpath], shell)
-		install_results.push {type: 'shell', directory: target_directory}
-		return install_results
+		new Promise (resolve) -> resolve()
+		.then =>
+			install = nar.install || {}
+			unless dirpath then throw new Error "dirpath required"
+			unless install.directory then throw new Error "install.txt directory entry required"
+			target_directory = install.directory
+			@install_children(nar, dirpath)
+			.then ({nar, install_results}) =>
+				@ghost(dirpath)
+				.then (ghost) =>
+					if install.accept? and install.accept != ghost.install.name then return null
+					@merge_shell(dirpath, target_directory, nar)
+				.then ->
+					install_results.push {type: 'shell', directory: target_directory}
+					return install_results
 	install_package: (nar, dirpath) ->
 		install_results = []
+		promise = new Promise (resolve) -> resolve()
 		for child in nar.listChildren()
 			directory = nar.getDirectory(child)
 			if Object.keys(directory.files).length
-				child_install_results = @install_nar directory, dirpath
-				install_results = install_results.concat child_install_results
-		return install_results
+				promise = promise.then =>
+					@install_nar directory, dirpath
+				.then (child_install_results) ->
+					install_results = install_results.concat child_install_results
+		promise.then ->
+			return install_results
 	install_children: (nar, dirpath) ->
 		install = nar.install || {}
 		install_results = []
+		promise = new Promise (resolve) -> resolve()
 		for type in ['balloon', 'headline', 'plugin']
 			if install[type + '.directory']?
 				if install[type + '.source.directory']?
@@ -103,30 +184,21 @@ class NanikaStorage
 				child_install.directory ?= install[type + '.directory']
 				if install[type + '.refresh']? then child_install.refresh ?= install[type + '.refresh']
 				if install[type + '.refreshundeletemask']? then child_install.refreshundeletemask ?= install[type + '.refreshundeletemask']
-				child_install_results = @install_nar child_nar, dirpath
-				install_results = install_results.concat child_install_results
-				nar = nar.removeElements(child_source_directory)
-		nar: nar, install_results: install_results
+				promise = promise.then =>
+					@install_nar child_nar, dirpath
+				.then (child_install_results) ->
+					install_results = install_results.concat child_install_results
+					nar = nar.removeElements(child_source_directory)
+		promise.then ->
+			nar: nar, install_results: install_results
 	uninstall_ghost: (dirpath) ->
-		delete @ghosts[dirpath]
+		@delete_ghost(dirpath)
 	uninstall_balloon: (dirpath) ->
-		delete @balloons[dirpath]
-	merge_directory: (directory=null, new_directory) ->
-		install = new_directory.install || {}
-		if directory?
-			if install.refresh
-				if install.refreshundeletemask
-					undelete_elements = install.refreshundeletemask.split /:/
-					directory = directory.getElements(undelete_elements)
-				else
-					directory = null
-		if directory?
-			for path of new_directory.files
-				directory.files[path] = new_directory.files[path]
-			directory.parse()
-		else
-			directory = new_directory
-		directory
+		@delete_balloon(dirpath)
+
+if @NanikaStorage?.Backend?
+	for name, value of @NanikaStorage.Backend
+		NanikaStorage.Backend[name] = value
 
 if module?.exports?
 	module.exports = NanikaStorage
