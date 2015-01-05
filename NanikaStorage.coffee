@@ -152,9 +152,9 @@ class NanikaStorage
 				.then (ghost) =>
 					if install.accept? and install.accept != ghost.install.name then return null
 					@merge_shell(dirpath, target_directory, nar)
-				.then ->
-					install_results.push {type: 'shell', directory: target_directory}
-					return install_results
+					.then ->
+						install_results.push {type: 'shell', directory: target_directory}
+						return install_results
 	install_package: (nar, dirpath) ->
 		install_results = []
 		promise = new Promise (resolve) -> resolve()

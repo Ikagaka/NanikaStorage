@@ -359,13 +359,13 @@
               if ((install.accept != null) && install.accept !== ghost.install.name) {
                 return null;
               }
-              return _this.merge_shell(dirpath, target_directory, nar);
-            }).then(function() {
-              install_results.push({
-                type: 'shell',
-                directory: target_directory
+              return _this.merge_shell(dirpath, target_directory, nar).then(function() {
+                install_results.push({
+                  type: 'shell',
+                  directory: target_directory
+                });
+                return install_results;
               });
-              return install_results;
             });
           });
         };
