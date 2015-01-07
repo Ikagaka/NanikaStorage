@@ -15,6 +15,18 @@ class NanikaStorage
 	shell: (dirpath, shellpath, directory, merge) ->
 		new Promise (resolve) -> resolve()
 		.then => @backend.shell(dirpath, shellpath, directory, merge)
+	base_profile: (profile) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.base_profile(profile)
+	ghost_profile: (dirpath, profile) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.ghost_profile(dirpath, profile)
+	balloon_profile: (dirpath, profile) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.balloon_profile(dirpath, profile)
+	shell_profile: (dirpath, shellpath, profile) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.shell_profile(dirpath, shellpath, profile)
 	ghosts: ->
 		new Promise (resolve) -> resolve()
 		.then => @backend.ghosts()

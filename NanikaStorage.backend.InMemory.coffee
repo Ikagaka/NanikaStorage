@@ -2,7 +2,7 @@ NanikaStorage = @NanikaStorage
 NanikaStorage ?= Backend: {}
 
 class NanikaStorage.Backend.InMemory
-	constructor: (@_ghosts={}, @_balloons={}) ->
+	constructor: (@_ghosts={}, @_balloons={}, @_profiles={ghost: {}, balloon: {}}) ->
 	ghost: (dirpath, directory, merge) ->
 		if directory?
 			if merge and @_ghosts[dirpath]?
@@ -39,6 +39,24 @@ class NanikaStorage.Backend.InMemory
 		ghost = @ghost(dirpath)
 		unless ghost.hasElement('shell/' + shellpath) then throw new Error "shell/#{shellpath} not found at [#{dirpath}]"
 		ghost.getDirectory('shell/' + shellpath)
+	base_profile: (profile) ->
+		if profile?
+			@_profiles.base = profile
+		@_profiles.base || {}
+	ghost_profile: (dirpath, profile) ->
+		if profile?
+			unless @_profiles.ghost[dirpath]?
+				@_profiles.ghost[dirpath] = ghost: {}, shell: {}
+			@_profiles.ghost[dirpath].ghost = profile
+		@_profiles.ghost[dirpath]?.ghost || {}
+	balloon_profile: (dirpath, profile) ->
+		if profile?
+			@_profiles.balloon[dirpath] = profile
+		@_profiles.balloon[dirpath] || {}
+	shell_profile: (dirpath, shellpath, profile) ->
+		if profile?
+			@_profiles.ghost[dirpath].shell[shellpath] = profile
+		@_profiles.ghost[dirpath]?.shell[shellpath] || {}
 	ghosts: ->
 		Object.keys(@_ghosts)
 	balloons: ->

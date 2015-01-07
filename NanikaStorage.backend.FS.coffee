@@ -25,6 +25,29 @@ class NanikaStorage.Backend.FS
 	shell: (dirpath, shellpath, directory, merge) ->
 		target = @path.join(@home, 'ghost', dirpath, 'shell', shellpath)
 		@_accessor(target, directory, merge)
+	_profile: (target, profile) ->
+		if profile?
+			dir = @path.dirname(target)
+			@_mkpath(dir).then =>
+				new Promise (resolve, reject) =>
+					@fs.writeFile target, JSON.stringify(profile), {encoding: 'utf8'}, (err) ->
+						if err? then reject(err) else resolve(profile)
+		else
+			new Promise (resolve, reject) =>
+				@fs.readFile target, {encoding: 'utf8'}, (err, data) ->
+					if err? then resolve({}) else resolve(if data.length then JSON.parse(data) else {})
+	base_profile: (profile) ->
+		target = @path.join(@home, 'profile')
+		@_profile(target, profile)
+	ghost_profile: (dirpath, profile) ->
+		target = @path.join(@home, 'ghost', dirpath, 'ghost', 'master', 'profile')
+		@_profile(target, profile)
+	balloon_profile: (dirpath, profile) ->
+		target = @path.join(@home, 'balloon', dirpath, 'profile')
+		@_profile(target, profile)
+	shell_profile: (dirpath, shellpath, profile) ->
+		target = @path.join(@home, 'ghost', dirpath, 'shell', shellpath, 'profile')
+		@_profile(target, profile)
 	ghosts: ->
 		target = @path.join(@home, 'ghost')
 		@_readdir(target)
@@ -198,7 +221,7 @@ class NanikaStorage.Backend.FS
 					dir = @path.dirname(itempath)
 					promises.push @_mkpath(dir).then =>
 						new Promise (resolve, reject) =>
-							@fs.writeFile itempath, new @Buffer(value.buffer()), {flag: 'w'}, (err) ->
+							@fs.writeFile itempath, new @Buffer(value.buffer()), {}, (err) ->
 								if err? then reject(err) else resolve()
 				else
 					promises.push @_mkpath(itempath).then ->

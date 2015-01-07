@@ -72,6 +72,66 @@
       return this._accessor(target, directory, merge);
     };
 
+    FS.prototype._profile = function(target, profile) {
+      var dir;
+      if (profile != null) {
+        dir = this.path.dirname(target);
+        return this._mkpath(dir).then((function(_this) {
+          return function() {
+            return new Promise(function(resolve, reject) {
+              return _this.fs.writeFile(target, JSON.stringify(profile), {
+                encoding: 'utf8'
+              }, function(err) {
+                if (err != null) {
+                  return reject(err);
+                } else {
+                  return resolve(profile);
+                }
+              });
+            });
+          };
+        })(this));
+      } else {
+        return new Promise((function(_this) {
+          return function(resolve, reject) {
+            return _this.fs.readFile(target, {
+              encoding: 'utf8'
+            }, function(err, data) {
+              if (err != null) {
+                return resolve({});
+              } else {
+                return resolve(data.length ? JSON.parse(data) : {});
+              }
+            });
+          };
+        })(this));
+      }
+    };
+
+    FS.prototype.base_profile = function(profile) {
+      var target;
+      target = this.path.join(this.home, 'profile');
+      return this._profile(target, profile);
+    };
+
+    FS.prototype.ghost_profile = function(dirpath, profile) {
+      var target;
+      target = this.path.join(this.home, 'ghost', dirpath, 'ghost', 'master', 'profile');
+      return this._profile(target, profile);
+    };
+
+    FS.prototype.balloon_profile = function(dirpath, profile) {
+      var target;
+      target = this.path.join(this.home, 'balloon', dirpath, 'profile');
+      return this._profile(target, profile);
+    };
+
+    FS.prototype.shell_profile = function(dirpath, shellpath, profile) {
+      var target;
+      target = this.path.join(this.home, 'ghost', dirpath, 'shell', shellpath, 'profile');
+      return this._profile(target, profile);
+    };
+
     FS.prototype.ghosts = function() {
       var target;
       target = this.path.join(this.home, 'ghost');
@@ -432,9 +492,7 @@
             dir = _this.path.dirname(itempath);
             return promises.push(_this._mkpath(dir).then(function() {
               return new Promise(function(resolve, reject) {
-                return _this.fs.writeFile(itempath, new _this.Buffer(value.buffer()), {
-                  flag: 'w'
-                }, function(err) {
+                return _this.fs.writeFile(itempath, new _this.Buffer(value.buffer()), {}, function(err) {
                   if (err != null) {
                     return reject(err);
                   } else {
