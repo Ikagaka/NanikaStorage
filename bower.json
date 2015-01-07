@@ -1,7 +1,7 @@
 {
 	"name": "NanikaStorage",
 	"description": "NanikaStorage - Nanika Storage",
-	"main": "NanikaStorage.js",
+	"main": ["NanikaStorage.js", "NanikaStorage.backend.InMemory.js", "NanikaStorage.backend.FS.js"],
 	"ignore": [
 		"**/.*",
 		"bower_components",
