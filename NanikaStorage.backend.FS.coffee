@@ -98,7 +98,7 @@ class NanikaStorage.Backend.FS
 		@_rmAll(target)
 	_filter_elements: (target, paths) ->
 		filter_paths = {}
-		paths.forEach (item) ->
+		paths.forEach (item) =>
 			filter_paths[item] = true
 			while true
 				itemdir = @path.dirname(item)
@@ -106,24 +106,31 @@ class NanikaStorage.Backend.FS
 					break
 				item = itemdir
 				filter_paths[item] = true
-		@_readdirAll target
-		.then (items) =>
-			selects = []
-			rmfiles = []
-			rmdirs = []
-			for item in items
-				itempath = @path.join(target, item)
-				if not filter_paths[item]
-					((itempath) =>
-						selects.push @_stat(itempath).then (stats) =>
-							if stats.isFile()
-								rmfiles.push itempath
-							else
-								rmdirs.push itempath
-					)(itempath)
-			Promise.all selects
-			.then => Promise.all rmfiles.map (file) => @_unlink(file)
-			.then -> Promise.all rmdirs.reverse().map (dir) => @_rmdir(dir)
+		new Promise (resolve, reject) =>
+			@fs.stat target, (err, stats) =>
+				if err? then resolve(false) else resolve(true)
+		.then (exists) =>
+			if exists
+				@_readdirAll target
+				.then (items) =>
+					selects = []
+					rmfiles = []
+					rmdirs = []
+					for item in items
+						itempath = @path.join(target, item)
+						if not filter_paths[item]
+							((itempath) =>
+								selects.push @_stat(itempath).then (stats) =>
+									if stats.isFile()
+										rmfiles.push itempath
+									else
+										rmdirs.push itempath
+							)(itempath)
+					Promise.all selects
+					.then =>
+						Promise.all rmfiles.map (file) => @_unlink(file)
+					.then =>
+						Promise.all rmdirs.reverse().map (dir) => @_rmdir(dir)
 	filter_ghost: (dirpath, paths) ->
 		target = @path.join(@home, 'ghost', dirpath)
 		@_filter_elements(target, paths)
