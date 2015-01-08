@@ -128,6 +128,7 @@ class NanikaStorage
 		.then =>
 			install = nar.install || {}
 			unless install.directory then throw new Error "install.txt directory entry required"
+			sakuraname = nar.getDirectory('ghost/master').descript['sakura.name']
 			target_directory = install.directory
 			@install_children(nar, dirpath, sakuraname)
 			.then ({nar, install_results}) =>

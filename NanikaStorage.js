@@ -326,6 +326,7 @@
           if (!install.directory) {
             throw new Error("install.txt directory entry required");
           }
+          sakuraname = nar.getDirectory('ghost/master').descript['sakura.name'];
           target_directory = install.directory;
           return _this.install_children(nar, dirpath, sakuraname).then(function(_arg) {
             var install_results, nar;
