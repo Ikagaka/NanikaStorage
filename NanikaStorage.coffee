@@ -105,35 +105,37 @@ class NanikaStorage
 				@shell(dirpath, shellpath, directory, false)
 		else
 			@shell(dirpath, shellpath, directory, true)
-	install_nar: (nar, dirpath) ->
+	install_nar: (nar, dirpath, sakuraname) ->
 		new Promise (resolve) -> resolve()
 		.then =>
-			switch nar.install.type
+			install = nar.install || {}
+			if install.accept? and install.accept != sakuraname then return null
+			switch install.type
 				when 'ghost'
-					@install_ghost nar, dirpath
+					@install_ghost nar, dirpath, sakuraname
 				when 'balloon'
-					@install_balloon nar, dirpath
+					@install_balloon nar, dirpath, sakuraname
 				when 'supplement'
-					@install_supplement nar, dirpath
+					@install_supplement nar, dirpath, sakuraname
 				when 'shell'
-					@install_shell nar, dirpath
+					@install_shell nar, dirpath, sakuraname
 				when 'package'
-					@install_package nar, dirpath
+					@install_package nar, dirpath, sakuraname
 				else
 					throw new Error 'not supported'
-	install_ghost: (nar, dirpath) ->
+	install_ghost: (nar, dirpath, sakuraname) ->
 		new Promise (resolve) -> resolve()
 		.then =>
 			install = nar.install || {}
 			unless install.directory then throw new Error "install.txt directory entry required"
 			target_directory = install.directory
-			@install_children(nar, dirpath)
+			@install_children(nar, dirpath, sakuraname)
 			.then ({nar, install_results}) =>
 				@merge_ghost(target_directory, nar)
 				.then ->
 					install_results.push {type: 'ghost', directory: target_directory}
 					return install_results
-	install_balloon: (nar, dirpath) ->
+	install_balloon: (nar, dirpath, sakuraname) ->
 		new Promise (resolve) -> resolve()
 		.then =>
 			install = nar.install || {}
@@ -144,42 +146,40 @@ class NanikaStorage
 			.then ->
 				install_results.push {type: 'balloon', directory: target_directory}
 				return install_results
-	install_supplement: (nar, dirpath) ->
+	install_supplement: (nar, dirpath, sakuraname) ->
 		new Promise (resolve) -> resolve()
 		.then =>
+			install = nar.install || {}
 			unless dirpath then throw new Error "dirpath required"
-			ghost = @ghost(dirpath)
-			if install.accept? and install.accept != ghost.install.name then return null
 			throw 'not implemented'
-	install_shell: (nar, dirpath) ->
+	install_shell: (nar, dirpath, sakuraname) ->
 		new Promise (resolve) -> resolve()
 		.then =>
 			install = nar.install || {}
 			unless dirpath then throw new Error "dirpath required"
 			unless install.directory then throw new Error "install.txt directory entry required"
 			target_directory = install.directory
-			@install_children(nar, dirpath)
+			@install_children(nar, dirpath, sakuraname)
 			.then ({nar, install_results}) =>
 				@ghost(dirpath)
 				.then (ghost) =>
-					if install.accept? and install.accept != ghost.install.name then return null
 					@merge_shell(dirpath, target_directory, nar)
 					.then ->
 						install_results.push {type: 'shell', directory: target_directory}
 						return install_results
-	install_package: (nar, dirpath) ->
+	install_package: (nar, dirpath, sakuraname) ->
 		install_results = []
 		promise = new Promise (resolve) -> resolve()
 		for child in nar.listChildren()
 			directory = nar.getDirectory(child)
 			if Object.keys(directory.files).length
 				promise = promise.then =>
-					@install_nar directory, dirpath
+					@install_nar directory, dirpath, sakuraname
 				.then (child_install_results) ->
 					install_results = install_results.concat child_install_results
 		promise.then ->
 			return install_results
-	install_children: (nar, dirpath) ->
+	install_children: (nar, dirpath, sakuraname) ->
 		install = nar.install || {}
 		install_results = []
 		promise = new Promise (resolve) -> resolve()
@@ -197,7 +197,7 @@ class NanikaStorage
 				if install[type + '.refresh']? then child_install.refresh ?= install[type + '.refresh']
 				if install[type + '.refreshundeletemask']? then child_install.refreshundeletemask ?= install[type + '.refreshundeletemask']
 				promise = promise.then =>
-					@install_nar child_nar, dirpath
+					@install_nar child_nar, dirpath, sakuraname
 				.then (child_install_results) ->
 					install_results = install_results.concat child_install_results
 					nar = nar.removeElements(child_source_directory)
