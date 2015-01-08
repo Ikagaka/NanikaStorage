@@ -97,7 +97,6 @@ class NanikaStorage.Backend.FS
 		target = @path.join(@home, 'balloon', dirpath)
 		@_rmAll(target)
 	_filter_elements: (target, paths) ->
-		throw new Error 'filel'
 		filter_paths = {}
 		paths.forEach (item) ->
 			filter_paths[item] = true

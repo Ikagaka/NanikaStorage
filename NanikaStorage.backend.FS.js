@@ -231,7 +231,6 @@
 
     FS.prototype._filter_elements = function(target, paths) {
       var filter_paths;
-      throw new Error('filel');
       filter_paths = {};
       paths.forEach(function(item) {
         var itemdir, _results;
