@@ -286,9 +286,7 @@
                   return _this._unlink(file);
                 }));
               }).then(function() {
-                return Promise.all(rmdirs.reverse().map(function(dir) {
-                  return _this._rmdir(dir);
-                }));
+                return _this._rmdirs(rmdirs);
               });
             });
           }
@@ -412,6 +410,84 @@
       })(this));
     };
 
+    FS.prototype._rmdirs = function(targets) {
+      var current_hierarchy, hierarchy, new_target_path, rmdirs, target, target_path, target_path_token, target_path_tokens, token, walk, _i, _j, _len, _len1;
+      hierarchy = {
+        children: {}
+      };
+      for (_i = 0, _len = targets.length; _i < _len; _i++) {
+        target = targets[_i];
+        target_path = this.path.resolve(target);
+        target_path_tokens = [];
+        while (true) {
+          token = this.path.basename(target_path);
+          new_target_path = this.path.dirname(target_path);
+          if (new_target_path === target_path) {
+            break;
+          }
+          target_path_tokens.unshift(token);
+          target_path = new_target_path;
+        }
+        current_hierarchy = hierarchy;
+        for (_j = 0, _len1 = target_path_tokens.length; _j < _len1; _j++) {
+          target_path_token = target_path_tokens[_j];
+          if (current_hierarchy.children[target_path_token] == null) {
+            current_hierarchy.children[target_path_token] = {
+              children: {}
+            };
+          }
+          current_hierarchy = current_hierarchy.children[target_path_token];
+        }
+        current_hierarchy.remove = true;
+      }
+      rmdirs = [];
+      walk = (function(_this) {
+        return function(current_hierarchy, hierarchy_path) {
+          var child, _k, _len2, _ref, _results;
+          if (current_hierarchy.remove) {
+            return rmdirs.push(hierarchy_path);
+          } else {
+            _ref = Object.keys(current_hierarchy.children);
+            _results = [];
+            for (_k = 0, _len2 = _ref.length; _k < _len2; _k++) {
+              child = _ref[_k];
+              _results.push(walk(current_hierarchy.children[child], _this.path.join(hierarchy_path, child)));
+            }
+            return _results;
+          }
+        };
+      })(this);
+      walk(hierarchy, '/');
+      return Promise.all(rmdirs.map((function(_this) {
+        return function(dir) {
+          return _this._rmdirAll(dir);
+        };
+      })(this)));
+    };
+
+    FS.prototype._rmdirAll = function(target) {
+      return this._readdirAll(target).then((function(_this) {
+        return function(dirs) {
+          var dir, promise, _fn, _i, _len, _ref;
+          dirs.unshift('');
+          promise = new Promise(function(resolve) {
+            return resolve();
+          });
+          _ref = dirs.reverse();
+          _fn = function(dir) {
+            return promise = promise.then(function() {
+              return _this._rmdir(_this.path.join(target, dir));
+            });
+          };
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            dir = _ref[_i];
+            _fn(dir);
+          }
+          return promise;
+        };
+      })(this));
+    };
+
     FS.prototype._rmAll = function(target) {
       return new Promise((function(_this) {
         return function(resolve, reject) {
@@ -451,9 +527,7 @@
                   return _this._unlink(file);
                 }));
               }).then(function() {
-                return Promise.all(rmdirs.reverse().map(function(dir) {
-                  return _this._rmdir(dir);
-                }));
+                return _this._rmdirs(rmdirs);
               });
             });
           }
@@ -505,7 +579,7 @@
             dir = _this.path.dirname(itempath);
             return promises.push(_this._mkpath(dir).then(function() {
               return new Promise(function(resolve, reject) {
-                return _this.fs.writeFile(itempath, new _this.Buffer(value.buffer()), {}, function(err) {
+                return _this.fs.writeFile(itempath, new _this.Buffer(new Uint8Array(value.buffer())), {}, function(err) {
                   if (err != null) {
                     return reject(err);
                   } else {

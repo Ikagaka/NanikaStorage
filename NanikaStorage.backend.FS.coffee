@@ -130,7 +130,7 @@ class NanikaStorage.Backend.FS
 					.then =>
 						Promise.all rmfiles.map (file) => @_unlink(file)
 					.then =>
-						Promise.all rmdirs.reverse().map (dir) => @_rmdir(dir)
+						@_rmdirs(rmdirs)
 	filter_ghost: (dirpath, paths) ->
 		target = @path.join(@home, 'ghost', dirpath)
 		@_filter_elements(target, paths)
@@ -177,6 +177,44 @@ class NanikaStorage.Backend.FS
 	_rmdir: (target) ->
 		new Promise (resolve, reject) =>
 			@fs.rmdir target, (err) -> if err? then reject() else resolve()
+	_rmdirs: (targets) ->
+		hierarchy = children: {}
+		# build tree
+		for target in targets
+			target_path = @path.resolve(target)
+			target_path_tokens = []
+			while true
+				token = @path.basename(target_path)
+				new_target_path = @path.dirname(target_path)
+				if new_target_path == target_path
+					break
+				target_path_tokens.unshift(token)
+				target_path = new_target_path
+			current_hierarchy = hierarchy
+			for target_path_token in target_path_tokens
+				unless current_hierarchy.children[target_path_token]?
+					current_hierarchy.children[target_path_token] = children: {}
+				current_hierarchy = current_hierarchy.children[target_path_token]
+			current_hierarchy.remove = true
+		rmdirs = []
+		walk = (current_hierarchy, hierarchy_path) =>
+			if current_hierarchy.remove
+				rmdirs.push hierarchy_path
+			else
+				for child in Object.keys(current_hierarchy.children)
+					walk current_hierarchy.children[child], @path.join(hierarchy_path, child)
+		walk hierarchy, '/'
+		Promise.all rmdirs.map (dir) => @_rmdirAll(dir)
+	_rmdirAll: (target) ->
+		@_readdirAll target
+		.then (dirs) =>
+			dirs.unshift ''
+			promise = new Promise (resolve) -> resolve()
+			for dir in dirs.reverse()
+				((dir) =>
+					promise = promise.then => @_rmdir(@path.join(target, dir))
+				)(dir)
+			promise
 	_rmAll: (target) ->
 		new Promise (resolve, reject) =>
 			@fs.stat target, (err, stats) =>
@@ -202,7 +240,7 @@ class NanikaStorage.Backend.FS
 					.then =>
 						Promise.all rmfiles.map (file) => @_unlink(file)
 					.then =>
-						Promise.all rmdirs.reverse().map (dir) => @_rmdir(dir)
+						@_rmdirs(rmdirs)
 	_mkpath: (target) ->
 		mode = parseInt("0777", 8)
 		mkdir = (target) =>
@@ -227,7 +265,7 @@ class NanikaStorage.Backend.FS
 					dir = @path.dirname(itempath)
 					promises.push @_mkpath(dir).then =>
 						new Promise (resolve, reject) =>
-							@fs.writeFile itempath, new @Buffer(value.buffer()), {}, (err) ->
+							@fs.writeFile itempath, new @Buffer(new Uint8Array(value.buffer())), {}, (err) ->
 								if err? then reject(err) else resolve()
 				else
 					promises.push @_mkpath(itempath).then ->
