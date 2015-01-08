@@ -155,10 +155,10 @@ class NanikaStorage.Backend.FS
 							.then (stats) =>
 								if stats.isDirectory()
 									readdir entry_path, basedir
-									.then (entry_paths) ->
-										[(entry_path.replace basedir, ''), entry_paths...]
+									.then (entry_paths) =>
+										[(@path.relative basedir, entry_path), entry_paths...]
 								else
-									[entry_path.replace basedir, '']
+									[@path.relative basedir, entry_path]
 						)(@path.join dir, entry)
 					Promise.all promises
 					.then (entry_paths_list) =>
@@ -166,17 +166,16 @@ class NanikaStorage.Backend.FS
 						for a_entry_paths in entry_paths_list
 							entry_paths = entry_paths.concat a_entry_paths
 						resolve entry_paths
-		basedir = RegExp '^' + target.replace(/(\W)/g, '\\$1') + '[\\\\/]?', 'i'
-		readdir target, basedir
+		readdir target, target
 	_stat: (target) ->
 		new Promise (resolve, reject) =>
-			@fs.stat target, (err, stats) -> if err? then reject() else resolve(stats)
+			@fs.stat target, (err, stats) -> if err? then reject(err) else resolve(stats)
 	_unlink: (target) ->
 		new Promise (resolve, reject) =>
-			@fs.unlink target, (err) -> if err? then reject() else resolve()
+			@fs.unlink target, (err) -> if err? then reject(err) else resolve()
 	_rmdir: (target) ->
 		new Promise (resolve, reject) =>
-			@fs.rmdir target, (err) -> if err? then reject() else resolve()
+			@fs.rmdir target, (err) -> if err? then reject(err) else resolve()
 	_rmdirs: (targets) ->
 		hierarchy = children: {}
 		# build tree
@@ -244,16 +243,17 @@ class NanikaStorage.Backend.FS
 	_mkpath: (target) ->
 		mode = parseInt("0777", 8)
 		mkdir = (target) =>
-			if !target then target = '/'
 			new Promise (resolve, reject) =>
 				@fs.stat target, (err, stats) =>
 					if err? then resolve(false) else resolve(true)
 			.then (exists) =>
 				unless exists
-					mkdir(@path.dirname(target))
-					.then =>
-						new Promise (resolve, reject) =>
-							@fs.mkdir target, mode, (err) -> resolve()
+					deep = @path.dirname(target)
+					unless deep == target
+						mkdir(deep)
+						.then =>
+							new Promise (resolve, reject) =>
+								@fs.mkdir target, mode, (err) -> resolve()
 		mkdir(target)
 	_DirectoryToFS: (target, directory) ->
 		promises = []
@@ -283,7 +283,7 @@ class NanikaStorage.Backend.FS
 					promises.push @_stat(itempath).then (stats) =>
 						if stats.isFile()
 							new Promise (resolve, reject) =>
-								@fs.readFile itempath, {}, (err, buffer) -> if err? then reject() else resolve(buffer)
+								@fs.readFile itempath, {}, (err, buffer) -> if err? then reject(err) else resolve(buffer)
 							.then (buffer) =>
 								directory[item] = @_toArrayBuffer(buffer)
 				)(item)
@@ -293,7 +293,7 @@ class NanikaStorage.Backend.FS
 	_FSFileToDirectory: (target, item) ->
 		itempath = @path.join(target, item)
 		new Promise (resolve, reject) =>
-			@fs.readFile itempath, {}, (err, buffer) -> if err? then reject() else resolve(buffer)
+			@fs.readFile itempath, {}, (err, buffer) -> if err? then reject(err) else resolve(buffer)
 		.then (buffer) =>
 			directory = {}
 			directory[item] = @_toArrayBuffer(buffer)

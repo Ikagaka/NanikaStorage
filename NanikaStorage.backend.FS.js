@@ -327,7 +327,7 @@
     };
 
     FS.prototype._readdirAll = function(target) {
-      var basedir, readdir;
+      var readdir;
       readdir = (function(_this) {
         return function(dir, basedir) {
           return new Promise(function(resolve, reject) {
@@ -343,10 +343,10 @@
                   return _this._stat(entry_path).then(function(stats) {
                     if (stats.isDirectory()) {
                       return readdir(entry_path, basedir).then(function(entry_paths) {
-                        return [entry_path.replace(basedir, '')].concat(__slice.call(entry_paths));
+                        return [_this.path.relative(basedir, entry_path)].concat(__slice.call(entry_paths));
                       });
                     } else {
-                      return [entry_path.replace(basedir, '')];
+                      return [_this.path.relative(basedir, entry_path)];
                     }
                   });
                 })(_this.path.join(dir, entry)));
@@ -364,8 +364,7 @@
           });
         };
       })(this);
-      basedir = RegExp('^' + target.replace(/(\W)/g, '\\$1') + '[\\\\/]?', 'i');
-      return readdir(target, basedir);
+      return readdir(target, target);
     };
 
     FS.prototype._stat = function(target) {
@@ -373,7 +372,7 @@
         return function(resolve, reject) {
           return _this.fs.stat(target, function(err, stats) {
             if (err != null) {
-              return reject();
+              return reject(err);
             } else {
               return resolve(stats);
             }
@@ -387,7 +386,7 @@
         return function(resolve, reject) {
           return _this.fs.unlink(target, function(err) {
             if (err != null) {
-              return reject();
+              return reject(err);
             } else {
               return resolve();
             }
@@ -401,7 +400,7 @@
         return function(resolve, reject) {
           return _this.fs.rmdir(target, function(err) {
             if (err != null) {
-              return reject();
+              return reject(err);
             } else {
               return resolve();
             }
@@ -540,9 +539,6 @@
       mode = parseInt("0777", 8);
       mkdir = (function(_this) {
         return function(target) {
-          if (!target) {
-            target = '/';
-          }
           return new Promise(function(resolve, reject) {
             return _this.fs.stat(target, function(err, stats) {
               if (err != null) {
@@ -552,14 +548,18 @@
               }
             });
           }).then(function(exists) {
+            var deep;
             if (!exists) {
-              return mkdir(_this.path.dirname(target)).then(function() {
-                return new Promise(function(resolve, reject) {
-                  return _this.fs.mkdir(target, mode, function(err) {
-                    return resolve();
+              deep = _this.path.dirname(target);
+              if (deep !== target) {
+                return mkdir(deep).then(function() {
+                  return new Promise(function(resolve, reject) {
+                    return _this.fs.mkdir(target, mode, function(err) {
+                      return resolve();
+                    });
                   });
                 });
-              });
+              }
             }
           });
         };
@@ -616,7 +616,7 @@
                 return new Promise(function(resolve, reject) {
                   return _this.fs.readFile(itempath, {}, function(err, buffer) {
                     if (err != null) {
-                      return reject();
+                      return reject(err);
                     } else {
                       return resolve(buffer);
                     }
@@ -645,7 +645,7 @@
         return function(resolve, reject) {
           return _this.fs.readFile(itempath, {}, function(err, buffer) {
             if (err != null) {
-              return reject();
+              return reject(err);
             } else {
               return resolve(buffer);
             }
