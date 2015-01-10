@@ -265,7 +265,7 @@ class NanikaStorage.Backend.FS
 					dir = @path.dirname(itempath)
 					promises.push @_mkpath(dir).then =>
 						new Promise (resolve, reject) =>
-							@fs.writeFile itempath, new @Buffer(new Uint8Array(value.buffer())), {}, (err) ->
+							@fs.writeFile itempath, @_fromArrayBuffer(value.buffer()), {}, (err) ->
 								if err? then reject(err) else resolve()
 				else
 					promises.push @_mkpath(itempath).then ->
@@ -299,13 +299,21 @@ class NanikaStorage.Backend.FS
 			directory[item] = @_toArrayBuffer(buffer)
 			new NanikaDirectory directory
 	_toArrayBuffer: (buffer) ->
-		abuffer = new ArrayBuffer(buffer.length)
-		view = new Uint8Array(abuffer)
-		i = 0
-		while i < buffer.length
-			view[i] = buffer.readUInt8(i)
-			i++
-		return abuffer
+		if buffer.set? # browserfs
+			abuffer = new ArrayBuffer(buffer.length)
+			view = new Uint8Array(abuffer)
+			i = 0
+			while i < buffer.length
+				view[i] = buffer.readUInt8(i)
+				i++
+			return abuffer
+		else
+			return new Uint8Array(buffer).buffer
+	_fromArrayBuffer: (abuffer) ->
+		if @Buffer::set? # browserfs
+			new @Buffer(abuffer)
+		else
+			new @Buffer(new Uint8Array(abuffer))
 
 if module?.exports?
 	module.exports = NanikaStorage
