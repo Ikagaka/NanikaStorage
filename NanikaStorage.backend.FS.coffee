@@ -77,7 +77,7 @@ class NanikaStorage.Backend.FS
 		@_elements_name(target, 'install.txt')
 	balloon_names: ->
 		target = @path.join(@home, 'balloon')
-		@_elements_name(target, 'install.txt')
+		@_elements_name(target, 'descript.txt')
 	shell_names: (dirpath) ->
 		target = @path.join(@home, 'ghost', dirpath, 'shell')
 		@_elements_name(target, 'descript.txt')
@@ -86,7 +86,7 @@ class NanikaStorage.Backend.FS
 		@_FSFileToDirectory(target, 'install.txt').then (directory) -> directory.install.name
 	balloon_name: (dirpath) ->
 		target = @path.join(@home, 'balloon', dirpath)
-		@_FSFileToDirectory(target, 'install.txt').then (directory) -> directory.install.name
+		@_FSFileToDirectory(target, 'descript.txt').then (directory) -> directory.descript.name
 	shell_name: (dirpath, shellpath) ->
 		target = @path.join(@home, 'ghost', dirpath, 'shell', shellpath)
 		@_FSFileToDirectory(target, 'descript.txt').then (directory) -> directory.descript.name

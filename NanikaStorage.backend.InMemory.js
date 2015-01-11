@@ -141,7 +141,7 @@
     InMemory.prototype.balloon_names = function() {
       return Object.keys(this._balloons).map((function(_this) {
         return function(directory) {
-          return _this._balloons[directory].install.name;
+          return _this._balloons[directory].descript.name;
         };
       })(this)).sort();
     };
@@ -166,7 +166,7 @@
     };
 
     InMemory.prototype.balloon_name = function(dirpath) {
-      return this.balloon(dirpath).install.name;
+      return this.balloon(dirpath).descript.name;
     };
 
     InMemory.prototype.shell_name = function(dirpath, shellpath) {

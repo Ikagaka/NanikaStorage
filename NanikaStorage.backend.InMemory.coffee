@@ -69,7 +69,7 @@ class NanikaStorage.Backend.InMemory
 		.sort()
 	balloon_names: ->
 		Object.keys(@_balloons)
-		.map (directory) => @_balloons[directory].install.name
+		.map (directory) => @_balloons[directory].descript.name
 		.sort()
 	shell_names: (dirpath) ->
 		shell = @ghost(dirpath).getDirectory('shell')
@@ -83,7 +83,7 @@ class NanikaStorage.Backend.InMemory
 	ghost_name: (dirpath) ->
 		@ghost(dirpath).install.name
 	balloon_name: (dirpath) ->
-		@balloon(dirpath).install.name
+		@balloon(dirpath).descript.name
 	shell_name: (dirpath, shellpath) ->
 		@shell(dirpath, shellpath).descript.name
 	delete_ghost: (dirpath) ->
