@@ -1,7 +1,7 @@
 NanikaStorage - Nanika Storage
 ==========================
 
-Nanika Storage for Ikagaka
+NanikaStorageは伺かに必要なストレージを抽象化するモジュールです。
 
 Installation
 --------------------------
@@ -11,72 +11,223 @@ unstable
 Usage
 --------------------------
 
-unstable
+`NanikaStorage`は`NanikaStorage.Backend.*`のフロントエンドです。
 
-API
+まずバックエンドを初期化し、NanikaStorageに渡して初期化します。
+
+Backends
 --------------------------
 
-unstable
+### NanikaStorage.Backend.InMemory
 
-### constructor
+メモリ上に状態を保存します。高速ですが、状態を保存するにはそのための仕組みを別に用意する必要があります。
 
-    var storage = new NanikaStorage(ghosts={}, balloons={})
+#### constructor(ghosts={}, balloons={}, profiles={})
 
-### ghost(dirpath, directory)
+    var ghosts = {"ghost_name": g_directory};
+    var balloons = {"balloon_name": b_directory};
+    var profiles = {
+      base: {},
+      ghost: {},
+      balloon: {}
+    };
+    var backend = new NanikaStorage.Backend.InMemory(ghosts, balloons, profiles);
 
-    var dir = storage.ghost('akos');
-    storage.ghost('akos', dir);
+全ての引数はオプションです。別に保存していた状態を復元するときなどに使えます。
 
-get and set directory(NanikaDirectory)
+`backend._ghosts`、`backend._balloons`、`backend._profiles`を保存することで状態を保存できます。
 
-### balloon(dirpath, directory)
+### NanikaStorage.Backend.FS
 
-    var dir = storage.balloon('origin');
-    storage.balloon('origin', dir);
+node.jsのFileSystemの非同期APIと互換のファイルシステムを扱います。他にnode.js互換のPath、Bufferが必要です。
 
-get and set directory(NanikaDirectory)
+#### constructor(home, fs, path, Buffer)
 
-### ghost_master(dirpath, directory)
+    var home = "ikagaka";
+    var fs = require('fs');
+    var path = require('path');
+    var Buffer = require('buffer').Buffer;
+    var backend = new NanikaStorage.Backend.FS(home, fs, path, Buffer);
 
-    var dir = storage.ghost_master('akos');
-    storage.ghost_master('akos', dir);
+homeはファイルシステムの中で扱うルートフォルダを指定します。
 
-get and set directory(NanikaDirectory)
+現状node.jsと[browserfs](https://github.com/jvilk/BrowserFS)をサポートしています。これらでBufferの実装に違いがある部分は吸収しています。
 
-### shell(dirpath, shellpath, directory)
+NanikaStorage API
+--------------------------
+
+NanikaStorageは[NanikaDirectory](https://github.com/Ikagaka/NarLoader)を利用します。
+
+### constructor(backend)
+
+    var storage = new NanikaStorage(backend)
+
+### ghost(dirpath, directory=undefined, merge=false)
+
+    storage.ghost('akos').then(function(dir){...});
+    storage.ghost('akos', dir).then(function(dir){...});
+
+dirpathで指定されたゴーストディレクトリ`baseware/ghost/dirpath/`を読み出し、書き込みします。
+
+引数directoryはNanikaDirectoryです。
+
+引数directoryが指定されれば内容をファイルシステムに書き込みます。
+mergeがtrueなら上書き、そうでないなら以前の内容を削除してから書き込みます。
+
+返り値はファイルシステムから読み出したNanikaDirectoryを解決値とするPromiseです。
+
+### balloon(dirpath, directory=undefined, merge=false)
+
+    storage.balloon('origin').then(function(dir){...});
+    storage.balloon('origin', dir).then(function(dir){...});
+
+dirpathで指定されたバルーンディレクトリ`baseware/balloon/dirpath/`を読み出し、書き込みします。
+
+他はghost()と同じです。
+
+### ghost_master(dirpath, directory=undefined, merge=false)
+
+    storage.ghost_master('akos').then(function(dir){...});
+    storage.ghost_master('akos', dir).then(function(dir){...});
+
+dirpathで指定されたゴーストmasterディレクトリ`baseware/ghost/dirpath/ghost/master/`を読み出し、書き込みします。
+
+他はghost()と同じです。
+
+### shell(dirpath, shellpath, directory=undefined, merge=false)
 
     var dir = storage.shell('akos', 'master');
     storage.shell('akos', 'master', dir);
 
-get and set directory(NanikaDirectory)
+    storage.shell('akos', 'master').then(function(dir){...});
+    storage.shell('akos', 'master', dir).then(function(dir){...});
+
+dirpathとshellpathで指定されたシェルディレクトリ`baseware/ghost/dirpath/shell/shellpath/`を読み出し、書き込みします。
+
+他はghost()と同じです。
+
+### base_profile(profile=undefined)
+
+ベースウェアのプロファイルを読み出し、書き込みします。
+
+オブジェクトprofileが指定されれば書き込みします。
+
+返り値はオブジェクトを解決値とするPromiseです。
+
+### ghost_profile(dirpath, profile=undefined)
+
+dirpathのゴーストのプロファイルを読み出し、書き込みします。
+
+オブジェクトprofileが指定されれば書き込みします。
+
+返り値はオブジェクトを解決値とするPromiseです。
+
+### balloon_profile(dirpath, profile=undefined)
+
+dirpathのバルーンのプロファイルを読み出し、書き込みします。
+
+オブジェクトprofileが指定されれば書き込みします。
+
+返り値はオブジェクトを解決値とするPromiseです。
+
+### shell_profile(dirpath, shellpath, profile=undefined)
+
+dirpathのゴーストのshellpathのシェルのプロファイルを読み出し、書き込みします。
+
+オブジェクトprofileが指定されれば書き込みします。
+
+返り値はオブジェクトを解決値とするPromiseです。
+
+### ghosts()
+
+ゴーストの全ディレクトリ名(`baseware/ghost/*/`)をリストにして返します。
+
+返り値は`Array`を解決値とするPromiseです。
+
+### balloons()
+
+バルーンの全ディレクトリ名(`baseware/balloon/*/`)をリストにして返します。
+
+返り値は`Array`を解決値とするPromiseです。
+
+### shells(dirpath)
+
+dirpathのゴーストのシェルの全ディレクトリ名(`baseware/ghost/dirpath/shell/*/`)をリストにして返します。
+
+返り値は`Array`を解決値とするPromiseです。
 
 ### ghost_names()
 
-get ghost name(install.txt's) list
+全ゴーストのinstall.txtにあるゴースト名をリストにして返します。
+
+返り値は`Array`を解決値とするPromiseです。
 
 ### balloon_names()
 
-get balloon name(install.txt's) list
+全バルーンのinstall.txtにあるバルーン名をリストにして返します。
 
-### install_nar(nar, dirpath)
+返り値は`Array`を解決値とするPromiseです。
 
-    var results = storage.install_nar(dir, 'akos');
+### shell_names(dirpath)
+
+dirpathのゴーストの全シェルのdescript.txtにあるシェル名をリストにして返します。
+
+返り値は`Array`を解決値とするPromiseです。
+
+### ghost_name(dirpath)
+
+dirpathのゴーストのinstall.txtにあるゴースト名を返します。
+
+返り値は文字列を解決値とするPromiseです。
+
+### balloon_name(dirpath)
+
+dirpathのバルーンのinstall.txtにあるバルーン名を返します。
+
+返り値は文字列を解決値とするPromiseです。
+
+### shell_name(dirpath, shellpath)
+
+dirpathのゴーストのshellpathのシェルのdescript.txtにあるシェル名を返します。
+
+返り値は文字列を解決値とするPromiseです。
+
+### install_nar(nar, dirpath, sakuraname)
+
+    storage.install_nar(dir, 'akos', 'アコ').then(function(results){...});
+    
     results = [
       {type: 'ghost', directory: 'raychel_rest'},
       {type: 'balloon', directory: 'raychel_balloon'}
     ];
 
-install nar(NanikaDirectory)
+narをインストールします。
 
-dirpath is target ghost's dirpath
+narはNanikaDirectoryです。
 
-### uninstall_ghost(dirpath)
+dirpathはインストール対象のゴーストのディレクトリ名、sakuranameはインストール対象のゴーストのsakura.nameです。
 
-uninstall ghost
+戻り値はインストール結果を解決値とするPromiseです。
 
-### uninstall_balloon(dirpath)
+インストールエラーがあればPromiseがfailします。
 
-uninstall balloon
+narのaccept値が適合しなかった場合、結果はnullが帰ります。
+
+インストールに成功すれば結果は結果の情報が含まれた配列になります。
+
+現在対応しているnarタイプはghost,balloon,shell,packageです。supplementは未対応です。
+
+### delete_ghost(dirpath), uninstall_ghost(dirpath)
+
+dirpathのゴーストを削除します。
+
+返り値はPromiseです。
+
+### delete_balloon(dirpath), uninstall_balloon(dirpath)
+
+dirpathのバルーンを削除します。
+
+返り値はPromiseです。
 
 License
 --------------------------
