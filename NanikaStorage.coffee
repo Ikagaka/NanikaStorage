@@ -3,6 +3,18 @@ Promise = @Promise
 class NanikaStorage
 	@Backend = {}
 	constructor: (@backend) ->
+	# for fs backend
+	ghost_base_path: -> @backend.ghost_base_path()
+	balloon_base_path: -> @backend.balloon_base_path()
+	shell_base_path: (dirpath) -> @backend.shell_base_path(dirpath)
+	ghost_path: (dirpath) -> @backend.ghost_path(dirpath)
+	balloon_path: (dirpath) -> @backend.balloon_path(dirpath)
+	ghost_master_path: (dirpath) -> @backend.ghost_master_path(dirpath)
+	shell_path: (dirpath, shellpath) -> @backend.shell_path(dirpath, shellpath)
+	base_profile_path: -> @backend.base_profile_path()
+	ghost_profile_path: (dirpath) -> @backend.ghost_profile_path(dirpath)
+	balloon_profile_path: (dirpath) -> @backend.balloon_profile_path(dirpath)
+	shell_profile_path: (dirpath, shellpath) -> @backend.shell_profile_path(dirpath, shellpath)
 	ghost: (dirpath, directory, merge) ->
 		new Promise (resolve) -> resolve()
 		.then => @backend.ghost(dirpath, directory, merge)

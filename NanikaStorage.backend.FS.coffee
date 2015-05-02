@@ -5,6 +5,17 @@ debug = false
 
 class NanikaStorage.Backend.FS
 	constructor: (@home, @fs, @path, @Buffer) ->
+	ghost_base_path: -> @path.join(@home, 'ghost')
+	balloon_base_path: -> @path.join(@home, 'balloon')
+	shell_base_path: (dirpath) -> @path.join(@ghost_path(dirpath), 'shell')
+	ghost_path: (dirpath) -> @path.join(@home, 'ghost', dirpath)
+	balloon_path: (dirpath) -> @path.join(@home, 'balloon', dirpath)
+	ghost_master_path: (dirpath) -> @path.join(@ghost_path(dirpath), 'ghost', 'master')
+	shell_path: (dirpath, shellpath) -> @path.join(@ghost_path(dirpath), 'shell', shellpath)
+	base_profile_path: -> @path.join(@home, 'profile', 'base.profile.json')
+	ghost_profile_path: (dirpath) -> @path.join(@ghost_master_path(dirpath), 'profile', 'ghost.profile.json')
+	balloon_profile_path: (dirpath) -> @path.join(@balloon_path(dirpath), 'profile', 'balloon.profile.json')
+	shell_profile_path: (dirpath, shellpath) -> @path.join(@shell_path(dirpath, shellpath), 'profile', 'shell.profile.json')
 	_accessor: (target, directory, merge) ->
 		promise = new Promise (resolve) -> resolve()
 		if directory?
@@ -14,16 +25,16 @@ class NanikaStorage.Backend.FS
 		promise = promise.then => @_FSToDirectory(target)
 		promise
 	ghost: (dirpath, directory, merge) ->
-		target = @path.join(@home, 'ghost', dirpath)
+		target = @ghost_path(dirpath)
 		@_accessor(target, directory, merge)
 	balloon: (dirpath, directory, merge) ->
-		target = @path.join(@home, 'balloon', dirpath)
+		target = @balloon_path(dirpath)
 		@_accessor(target, directory, merge)
 	ghost_master: (dirpath, directory, merge) ->
-		target = @path.join(@home, 'ghost', dirpath, 'ghost', 'master')
+		target = @ghost_master_path(dirpath)
 		@_accessor(target, directory, merge)
 	shell: (dirpath, shellpath, directory, merge) ->
-		target = @path.join(@home, 'ghost', dirpath, 'shell', shellpath)
+		target = @shell_path(dirpath, shellpath)
 		@_accessor(target, directory, merge)
 	_profile: (target, profile) ->
 		if profile?
@@ -37,25 +48,25 @@ class NanikaStorage.Backend.FS
 				@fs.readFile target, {encoding: 'utf8'}, (err, data) ->
 					if err? then resolve({}) else resolve(if data.length then JSON.parse(data) else {})
 	base_profile: (profile) ->
-		target = @path.join(@home, 'profile')
+		target = @base_profile_path()
 		@_profile(target, profile)
 	ghost_profile: (dirpath, profile) ->
-		target = @path.join(@home, 'ghost', dirpath, 'ghost', 'master', 'profile')
+		target = @ghost_profile_path(dirpath)
 		@_profile(target, profile)
 	balloon_profile: (dirpath, profile) ->
-		target = @path.join(@home, 'balloon', dirpath, 'profile')
+		target = @balloon_profile_path(dirpath)
 		@_profile(target, profile)
 	shell_profile: (dirpath, shellpath, profile) ->
-		target = @path.join(@home, 'ghost', dirpath, 'shell', shellpath, 'profile')
+		target = @shell_profile_path(dirpath, shellpath)
 		@_profile(target, profile)
 	ghosts: ->
-		target = @path.join(@home, 'ghost')
+		target = @ghost_base_path()
 		@_readdir(target)
 	balloons: ->
-		target = @path.join(@home, 'balloon')
+		target = @balloon_base_path()
 		@_readdir(target)
 	shells: (dirpath) ->
-		target = @path.join(@home, 'ghost', dirpath, 'shell')
+		target = @shell_base_path(dirpath)
 		@_readdir(target)
 	_elements_name: (target, type) ->
 		@_readdir(target)
@@ -73,28 +84,28 @@ class NanikaStorage.Backend.FS
 					directories.map (directory) -> directory.descript.name
 					.sort()
 	ghost_names: ->
-		target = @path.join(@home, 'ghost')
+		target = @ghost_base_path()
 		@_elements_name(target, 'install.txt')
 	balloon_names: ->
-		target = @path.join(@home, 'balloon')
+		target = @balloon_base_path()
 		@_elements_name(target, 'descript.txt')
 	shell_names: (dirpath) ->
-		target = @path.join(@home, 'ghost', dirpath, 'shell')
+		target = @shell_base_path(dirpath)
 		@_elements_name(target, 'descript.txt')
 	ghost_name: (dirpath) ->
-		target = @path.join(@home, 'ghost', dirpath)
+		target = @ghost_path(dirpath)
 		@_FSFileToDirectory(target, 'install.txt').then (directory) -> directory.install.name
 	balloon_name: (dirpath) ->
-		target = @path.join(@home, 'balloon', dirpath)
+		target = @balloon_path(dirpath)
 		@_FSFileToDirectory(target, 'descript.txt').then (directory) -> directory.descript.name
 	shell_name: (dirpath, shellpath) ->
-		target = @path.join(@home, 'ghost', dirpath, 'shell', shellpath)
+		target = @shell_path(dirpath, shellpath)
 		@_FSFileToDirectory(target, 'descript.txt').then (directory) -> directory.descript.name
 	delete_ghost: (dirpath) ->
-		target = @path.join(@home, 'ghost', dirpath)
+		target = @ghost_path(dirpath)
 		@_rmAll(target)
 	delete_balloon: (dirpath) ->
-		target = @path.join(@home, 'balloon', dirpath)
+		target = @balloon_path(dirpath)
 		@_rmAll(target)
 	_filter_elements: (target, paths) ->
 		filter_paths = {}
@@ -132,13 +143,13 @@ class NanikaStorage.Backend.FS
 					.then =>
 						@_rmdirs(rmdirs)
 	filter_ghost: (dirpath, paths) ->
-		target = @path.join(@home, 'ghost', dirpath)
+		target = @ghost_path(dirpath)
 		@_filter_elements(target, paths)
 	filter_balloon: (dirpath, paths) ->
-		target = @path.join(@home, 'balloon', dirpath)
+		target = @balloon_path(dirpath)
 		@_filter_elements(target, paths)
 	filter_shell: (dirpath, shellpath, paths) ->
-		target = @path.join(@home, 'ghost', dirpath, 'shell', shellpath)
+		target = @shell_path(dirpath, shellpath)
 		@_filter_elements(target, paths)
 	_readdir: (target) ->
 		new Promise (resolve, reject) =>
