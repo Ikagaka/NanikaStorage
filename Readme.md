@@ -62,6 +62,8 @@ NanikaStorageは[NanikaDirectory](https://github.com/Ikagaka/NarLoader)を利用
 
     var storage = new NanikaStorage(backend)
 
+バックエンドのインスタンスを渡してnewします。
+
 ### ghost(dirpath, directory=undefined, merge=false)
 
     storage.ghost('akos').then(function(dir){...});
@@ -228,6 +230,71 @@ dirpathのゴーストを削除します。
 dirpathのバルーンを削除します。
 
 返り値はPromiseです。
+
+### filter_ghost(dirpath, paths)
+
+dirpathにあるゴースト配下のpathsに指定された以外のファイル、ディレクトリを削除します。
+
+### filter_balloon(dirpath, paths)
+
+dirpathにあるバルーン配下のpathsに指定された以外のファイル、ディレクトリを削除します。
+
+### filter_shell(dirpath, shellpath, paths)
+
+dirpath, shellpathにあるシェル配下のpathsに指定された以外のファイル、ディレクトリを削除します。
+
+NanikaStorage FS API
+--------------------------
+
+NanikaStorage.Backend.FSバックエンドを利用した場合のみ利用できるAPIです。
+
+### home
+
+ベースウェアのホームディレトクリのパス
+
+### ghost_base_path()
+
+ghostディレクトリのパス
+
+### balloon_base_path()
+
+balloonディレクトリのパス
+
+### shell_base_path(dirpath)
+
+dirpathのゴーストのshellディレクトリのパス
+
+### ghost_path(dirpath)
+
+dirpathのゴーストのルートディレクトリパス
+
+### balloon_path(dirpath)
+
+dirpathのバルーンのルートディレクトリパス
+
+### ghost_master_path(dirpath)
+
+dirpathのゴーストのghost/masterディレクトリのパス
+
+### shell_path(dirpath, shellpath)
+
+dirpathのゴーストのshellpathのシェルディレクトリのパス
+
+### base_profile_path()
+
+ベースウェアのプロファイルのパス
+
+### ghost_profile_path(dirpath)
+
+dirpathのゴーストのプロファイルパス
+
+### balloon_profile_path(dirpath)
+
+dirpathのバルーンのプロファイルパス
+
+### shell_profile_path(dirpath, shellpath)
+
+dirpathのゴーストのshellpathのシェルのプロファイルのパス
 
 License
 --------------------------
