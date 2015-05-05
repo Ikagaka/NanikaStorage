@@ -235,13 +235,19 @@ dirpathのバルーンを削除します。
 
 dirpathにあるゴースト配下のpathsに指定された以外のファイル、ディレクトリを削除します。
 
+返り値はPromiseです。
+
 ### filter_balloon(dirpath, paths)
 
 dirpathにあるバルーン配下のpathsに指定された以外のファイル、ディレクトリを削除します。
 
+返り値はPromiseです。
+
 ### filter_shell(dirpath, shellpath, paths)
 
 dirpath, shellpathにあるシェル配下のpathsに指定された以外のファイル、ディレクトリを削除します。
+
+返り値はPromiseです。
 
 NanikaStorage FS API
 --------------------------
