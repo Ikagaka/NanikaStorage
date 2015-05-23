@@ -310,21 +310,18 @@ class NanikaStorage.Backend.FS
 			directory[item] = @_toArrayBuffer(buffer)
 			new NanikaDirectory directory
 	_toArrayBuffer: (buffer) ->
-		if buffer.set? # browserfs
-			abuffer = new ArrayBuffer(buffer.length)
-			view = new Uint8Array(abuffer)
-			i = 0
-			while i < buffer.length
-				view[i] = buffer.readUInt8(i)
-				i++
-			return abuffer
-		else
-			return new Uint8Array(buffer).buffer
+		abuffer = new ArrayBuffer(buffer.length)
+		view = new Uint8Array(abuffer)
+		i = 0
+		while i < buffer.length
+			view[i] = buffer.readUInt8(i)
+			i++
+		return abuffer
 	_fromArrayBuffer: (abuffer) ->
-		if @Buffer::set? # browserfs
-			new @Buffer(abuffer)
-		else
+		try
 			new @Buffer(new Uint8Array(abuffer))
+		catch
+			new @Buffer(abuffer)
 
 if module?.exports?
 	module.exports = NanikaStorage

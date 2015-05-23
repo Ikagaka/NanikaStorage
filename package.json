@@ -1,6 +1,6 @@
 {
 	"name": "NanikaStorage",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "NanikaStorage - Nanika Storage",
 	"keywords": ["ukagaka", "ikagaka"],
 	"main": "NanikaStorage.js",
