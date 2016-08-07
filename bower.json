@@ -1,5 +1,5 @@
 {
-	"name": "NanikaStorage",
+	"name": "nanika-storage",
 	"description": "NanikaStorage - Nanika Storage",
 	"main": ["NanikaStorage.js", "NanikaStorage.backend.InMemory.js", "NanikaStorage.backend.FS.js"],
 	"ignore": [
