@@ -1,4 +1,7 @@
-NanikaStorage = @NanikaStorage
+if require?
+	NanikaStorage = require('./NanikaStorage')
+else if window?
+	NanikaStorage = window.NanikaStorage
 NanikaStorage ?= Backend: {}
 
 class NanikaStorage.Backend.InMemory
@@ -99,7 +102,7 @@ class NanikaStorage.Backend.InMemory
 
 if module?.exports?
 	module.exports = NanikaStorage
-else if @Ikagaka?
-	@Ikagaka.NanikaStorage = NanikaStorage
-else
-	@NanikaStorage = NanikaStorage
+else if window?.Ikagaka?
+	window.Ikagaka.NanikaStorage = NanikaStorage
+else if window?
+	window.NanikaStorage = NanikaStorage

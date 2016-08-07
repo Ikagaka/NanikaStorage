@@ -1,4 +1,8 @@
-Promise = @Promise
+unless Promise?
+	if require?
+		Promise = require('bluebird')
+	else if window?
+		Promise = window.Promise
 
 class NanikaStorage
 	@Backend = {}
@@ -221,13 +225,13 @@ class NanikaStorage
 	uninstall_balloon: (dirpath) ->
 		@delete_balloon(dirpath)
 
-if @NanikaStorage?.Backend?
-	for name, value of @NanikaStorage.Backend
+if window?.NanikaStorage?.Backend?
+	for name, value of window.NanikaStorage.Backend
 		NanikaStorage.Backend[name] = value
 
 if module?.exports?
 	module.exports = NanikaStorage
-else if @Ikagaka?
-	@Ikagaka.NanikaStorage = NanikaStorage
-else
-	@NanikaStorage = NanikaStorage
+else if window?.Ikagaka?
+	window.Ikagaka.NanikaStorage = NanikaStorage
+else if window?
+	window.NanikaStorage = NanikaStorage
