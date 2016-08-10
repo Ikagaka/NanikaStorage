@@ -6,7 +6,7 @@
     "ukagaka",
     "ikagaka"
   ],
-  "main": "NanikaStorage.js",
+  "main": "./NanikaStorage.js",
   "scripts": {
     "test": "mocha"
   },
