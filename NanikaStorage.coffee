@@ -5,7 +5,7 @@ unless Promise?
 		Promise = window.Promise
 
 class NanikaStorage
-	@Backend = {}
+	@Backend ?= {}
 	constructor: (@backend) ->
 	# for fs backend
 	ghost_base_path: -> @backend.ghost_base_path()

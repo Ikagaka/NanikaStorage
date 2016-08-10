@@ -11,7 +11,9 @@
   }
 
   NanikaStorage = (function() {
-    NanikaStorage.Backend = {};
+    if (NanikaStorage.Backend == null) {
+      NanikaStorage.Backend = {};
+    }
 
     function NanikaStorage(backend) {
       this.backend = backend;
