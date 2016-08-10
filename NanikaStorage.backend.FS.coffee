@@ -2,7 +2,8 @@ if require?
 	NanikaStorage = require('./NanikaStorage')
 else if window?
 	NanikaStorage = window.NanikaStorage
-NanikaStorage ?= Backend: {}
+NanikaStorage ?= {}
+NanikaStorage.Backend ?= {}
 
 debug = false
 

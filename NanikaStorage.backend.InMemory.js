@@ -9,9 +9,11 @@
   }
 
   if (NanikaStorage == null) {
-    NanikaStorage = {
-      Backend: {}
-    };
+    NanikaStorage = {};
+  }
+
+  if (NanikaStorage.Backend == null) {
+    NanikaStorage.Backend = {};
   }
 
   NanikaStorage.Backend.InMemory = (function() {
