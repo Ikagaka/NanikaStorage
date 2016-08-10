@@ -247,6 +247,10 @@ if window?.NanikaStorage?.Backend?
 	for name, value of window.NanikaStorage.Backend
 		NanikaStorage.Backend[name] = value
 
+if require?
+  require './NanikaStorage.backend.FS'
+  require './NanikaStorage.backend.InMemory'
+
 if module?.exports?
 	module.exports = NanikaStorage
 else if window?.Ikagaka?

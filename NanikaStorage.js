@@ -622,6 +622,11 @@
     }
   }
 
+  if (typeof require !== "undefined" && require !== null) {
+    require('./NanikaStorage.backend.FS');
+    require('./NanikaStorage.backend.InMemory');
+  }
+
   if ((typeof module !== "undefined" && module !== null ? module.exports : void 0) != null) {
     module.exports = NanikaStorage;
   } else if ((typeof window !== "undefined" && window !== null ? window.Ikagaka : void 0) != null) {
