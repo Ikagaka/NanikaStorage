@@ -231,6 +231,66 @@
       })(this));
     };
 
+    NanikaStorage.prototype.ghost_install = function(dirpath) {
+      return new Promise(function(resolve) {
+        return resolve();
+      }).then((function(_this) {
+        return function() {
+          return _this.backend.ghost_install(dirpath);
+        };
+      })(this));
+    };
+
+    NanikaStorage.prototype.balloon_install = function(dirpath) {
+      return new Promise(function(resolve) {
+        return resolve();
+      }).then((function(_this) {
+        return function() {
+          return _this.backend.balloon_install(dirpath);
+        };
+      })(this));
+    };
+
+    NanikaStorage.prototype.shell_install = function(dirpath, shellpath) {
+      return new Promise(function(resolve) {
+        return resolve();
+      }).then((function(_this) {
+        return function() {
+          return _this.backend.shell_install(dirpath, shellpath);
+        };
+      })(this));
+    };
+
+    NanikaStorage.prototype.ghost_descript = function(dirpath) {
+      return new Promise(function(resolve) {
+        return resolve();
+      }).then((function(_this) {
+        return function() {
+          return _this.backend.ghost_descript(dirpath);
+        };
+      })(this));
+    };
+
+    NanikaStorage.prototype.balloon_descript = function(dirpath) {
+      return new Promise(function(resolve) {
+        return resolve();
+      }).then((function(_this) {
+        return function() {
+          return _this.backend.balloon_descript(dirpath);
+        };
+      })(this));
+    };
+
+    NanikaStorage.prototype.shell_descript = function(dirpath, shellpath) {
+      return new Promise(function(resolve) {
+        return resolve();
+      }).then((function(_this) {
+        return function() {
+          return _this.backend.shell_descript(dirpath, shellpath);
+        };
+      })(this));
+    };
+
     NanikaStorage.prototype.delete_ghost = function(dirpath) {
       return new Promise(function(resolve) {
         return resolve();

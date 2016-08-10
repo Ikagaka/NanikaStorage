@@ -232,7 +232,7 @@
     FS.prototype.balloon_names = function() {
       var target;
       target = this.balloon_base_path();
-      return this._elements_name(target, 'descript.txt');
+      return this._elements_name(target, 'install.txt');
     };
 
     FS.prototype.shell_names = function(dirpath) {
@@ -242,26 +242,85 @@
     };
 
     FS.prototype.ghost_name = function(dirpath) {
-      var target;
-      target = this.ghost_path(dirpath);
-      return this._FSFileToDirectory(target, 'install.txt').then(function(directory) {
-        return directory.install.name;
+      return this.ghost_install(dirpath).then(function(install) {
+        return install.name;
       });
     };
 
     FS.prototype.balloon_name = function(dirpath) {
-      var target;
-      target = this.balloon_path(dirpath);
-      return this._FSFileToDirectory(target, 'descript.txt').then(function(directory) {
-        return directory.descript.name;
+      return this.balloon_install(dirpath).then(function(install) {
+        return install.name;
       });
     };
 
     FS.prototype.shell_name = function(dirpath, shellpath) {
+      return this.shell_descript(dirpath.shellpath).then(function(descript) {
+        return descript.name;
+      });
+    };
+
+    FS.prototype.ghost_install = function(dirpath) {
+      var target;
+      target = this.ghost_path(dirpath);
+      return this._FSFileToDirectory(target, 'install.txt').then(function(directory) {
+        return directory.install;
+      });
+    };
+
+    FS.prototype.balloon_install = function(dirpath) {
+      var target;
+      target = this.balloon_path(dirpath);
+      return this._FSFileToDirectory(target, 'install.txt').then(function(directory) {
+        return directory.install;
+      });
+    };
+
+    FS.prototype.shell_install = function(dirpath, shellpath) {
+      var itempath, target;
+      target = this.shell_path(dirpath, shellpath);
+      itempath = this.path.join(target, 'install.txt');
+      return new Promise((function(_this) {
+        return function(resolve, reject) {
+          return _this.fs.stat(itempath, function(err, stats) {
+            if (err != null) {
+              return resolve(false);
+            } else {
+              return resolve(true);
+            }
+          });
+        };
+      })(this)).then((function(_this) {
+        return function(exists) {
+          if (exists) {
+            return _this._FSFileToDirectory(target, 'install.txt').then(function(directory) {
+              return directory.install;
+            });
+          }
+        };
+      })(this));
+    };
+
+    FS.prototype.ghost_descript = function(dirpath) {
+      var target;
+      target = this.ghost_master_path(dirpath);
+      return this._FSFileToDirectory(target, 'descript.txt').then(function(directory) {
+        return directory.descript;
+      });
+    };
+
+    FS.prototype.balloon_descript = function(dirpath) {
+      var target;
+      target = this.balloon_path(dirpath);
+      return this._FSFileToDirectory(target, 'descript.txt').then(function(directory) {
+        return directory.descript;
+      });
+    };
+
+    FS.prototype.shell_descript = function(dirpath, shellpath) {
       var target;
       target = this.shell_path(dirpath, shellpath);
       return this._FSFileToDirectory(target, 'descript.txt').then(function(directory) {
-        return directory.descript.name;
+        return directory.descript;
       });
     };
 

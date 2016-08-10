@@ -70,6 +70,24 @@ class NanikaStorage
 	shell_name: (dirpath, shellpath) ->
 		new Promise (resolve) -> resolve()
 		.then => @backend.shell_name(dirpath, shellpath)
+	ghost_install: (dirpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.ghost_install(dirpath)
+	balloon_install: (dirpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.balloon_install(dirpath)
+	shell_install: (dirpath, shellpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.shell_install(dirpath, shellpath)
+	ghost_descript: (dirpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.ghost_descript(dirpath)
+	balloon_descript: (dirpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.balloon_descript(dirpath)
+	shell_descript: (dirpath, shellpath) ->
+		new Promise (resolve) -> resolve()
+		.then => @backend.shell_descript(dirpath, shellpath)
 	delete_ghost: (dirpath) ->
 		new Promise (resolve) -> resolve()
 		.then => @backend.delete_ghost(dirpath)

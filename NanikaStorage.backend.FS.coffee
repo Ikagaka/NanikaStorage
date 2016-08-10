@@ -91,19 +91,40 @@ class NanikaStorage.Backend.FS
 		@_elements_name(target, 'install.txt')
 	balloon_names: ->
 		target = @balloon_base_path()
-		@_elements_name(target, 'descript.txt')
+		@_elements_name(target, 'install.txt')
 	shell_names: (dirpath) ->
 		target = @shell_base_path(dirpath)
 		@_elements_name(target, 'descript.txt')
 	ghost_name: (dirpath) ->
-		target = @ghost_path(dirpath)
-		@_FSFileToDirectory(target, 'install.txt').then (directory) -> directory.install.name
+		@ghost_install(dirpath).then (install) -> install.name
 	balloon_name: (dirpath) ->
-		target = @balloon_path(dirpath)
-		@_FSFileToDirectory(target, 'descript.txt').then (directory) -> directory.descript.name
+		@balloon_install(dirpath).then (install) -> install.name
 	shell_name: (dirpath, shellpath) ->
+		@shell_descript(dirpath. shellpath).then (descript) -> descript.name
+	ghost_install: (dirpath) ->
+		target = @ghost_path(dirpath)
+		@_FSFileToDirectory(target, 'install.txt').then (directory) -> directory.install
+	balloon_install: (dirpath) ->
+		target = @balloon_path(dirpath)
+		@_FSFileToDirectory(target, 'install.txt').then (directory) -> directory.install
+	shell_install: (dirpath, shellpath) ->
 		target = @shell_path(dirpath, shellpath)
-		@_FSFileToDirectory(target, 'descript.txt').then (directory) -> directory.descript.name
+		itempath = @path.join(target, 'install.txt')
+		new Promise (resolve, reject) =>
+			@fs.stat itempath, (err, stats) =>
+				if err? then resolve(false) else resolve(true)
+		.then (exists) =>
+			if exists
+				@_FSFileToDirectory(target, 'install.txt').then (directory) -> directory.install
+	ghost_descript: (dirpath) ->
+		target = @ghost_master_path(dirpath)
+		@_FSFileToDirectory(target, 'descript.txt').then (directory) -> directory.descript
+	balloon_descript: (dirpath) ->
+		target = @balloon_path(dirpath)
+		@_FSFileToDirectory(target, 'descript.txt').then (directory) -> directory.descript
+	shell_descript: (dirpath, shellpath) ->
+		target = @shell_path(dirpath, shellpath)
+		@_FSFileToDirectory(target, 'descript.txt').then (directory) -> directory.descript
 	delete_ghost: (dirpath) ->
 		target = @ghost_path(dirpath)
 		@_rmAll(target)

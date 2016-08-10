@@ -145,7 +145,7 @@
     InMemory.prototype.balloon_names = function() {
       return Object.keys(this._balloons).map((function(_this) {
         return function(directory) {
-          return _this._balloons[directory].descript.name;
+          return _this._balloons[directory].install.name;
         };
       })(this)).sort();
     };
@@ -166,15 +166,39 @@
     };
 
     InMemory.prototype.ghost_name = function(dirpath) {
-      return this.ghost(dirpath).install.name;
+      return this.ghost_install(dirpath).name;
     };
 
     InMemory.prototype.balloon_name = function(dirpath) {
-      return this.balloon(dirpath).descript.name;
+      return this.balloon_install(dirpath).name;
     };
 
     InMemory.prototype.shell_name = function(dirpath, shellpath) {
-      return this.shell(dirpath, shellpath).descript.name;
+      return this.shell_descript(dirpath, shellpath).name;
+    };
+
+    InMemory.prototype.ghost_install = function(dirpath) {
+      return this.ghost(dirpath).install;
+    };
+
+    InMemory.prototype.balloon_install = function(dirpath) {
+      return this.balloon(dirpath).install;
+    };
+
+    InMemory.prototype.shell_install = function(dirpath, shellpath) {
+      return this.shell(dirpath, shellpath).install;
+    };
+
+    InMemory.prototype.ghost_descript = function(dirpath) {
+      return this.ghost_master(dirpath).descript;
+    };
+
+    InMemory.prototype.balloon_descript = function(dirpath) {
+      return this.balloon(dirpath).descript;
+    };
+
+    InMemory.prototype.shell_descript = function(dirpath, shellpath) {
+      return this.shell(dirpath, shellpath).descript;
     };
 
     InMemory.prototype.delete_ghost = function(dirpath) {

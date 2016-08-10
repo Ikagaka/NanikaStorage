@@ -194,6 +194,42 @@ dirpathのゴーストのshellpathのシェルのdescript.txtにあるシェル�
 
 返り値は文字列を解決値とするPromiseです。
 
+### ghost_install(dirpath)
+
+dirpathのゴーストのinstall.txtの内容を返します。
+
+返り値はハッシュを解決値とするPromiseです。
+
+### balloon_install(dirpath)
+
+dirpathのバルーンのinstall.txtの内容を返します。
+
+返り値はハッシュを解決値とするPromiseです。
+
+### shell_install(dirpath, shellpath)
+
+dirpathのゴーストのshellpathのシェルのinstall.txtの内容を返します。
+
+返り値はハッシュを解決値とするPromiseです。ただしinstall.txtが存在しない場合は解決値としてundefinedが返ります。
+
+### ghost_descript(dirpath)
+
+dirpathのゴーストのdescript.txtの内容を返します。
+
+返り値はハッシュを解決値とするPromiseです。
+
+### balloon_descript(dirpath)
+
+dirpathのバルーンのdescript.txtの内容を返します。
+
+返り値はハッシュを解決値とするPromiseです。
+
+### shell_descript(dirpath, shellpath)
+
+dirpathのゴーストのshellpathのシェルのdescript.txtの内容を返します。
+
+返り値はハッシュを解決値とするPromiseです。
+
 ### install_nar(nar, dirpath, sakuraname)
 
     storage.install_nar(dir, 'akos', 'アコ').then(function(results){...});
