@@ -1,12 +1,28 @@
 NanikaStorage - Nanika Storage
 ==========================
 
+[![npm](https://img.shields.io/npm/v/nanika-storage.svg)](https://www.npmjs.com/package/nanika-storage)
+[![npm license](https://img.shields.io/npm/l/nanika-storage.svg)](https://www.npmjs.com/package/nanika-storage)
+[![npm download total](https://img.shields.io/npm/dt/nanika-storage.svg)](https://www.npmjs.com/package/nanika-storage)
+[![npm download by month](https://img.shields.io/npm/dm/nanika-storage.svg)](https://www.npmjs.com/package/nanika-storage)
+[![Bower](https://img.shields.io/bower/v/nanika-storage.svg)](https://github.com/Ikagaka/NanikaStorage)
+[![Bower](https://img.shields.io/bower/l/nanika-storage.svg)](https://github.com/Ikagaka/NanikaStorage)
+
+[![Dependency Status](https://david-dm.org/Ikagaka/NanikaStorage.svg)](https://david-dm.org/Ikagaka/NanikaStorage)
+[![devDependency Status](https://david-dm.org/Ikagaka/NanikaStorage/dev-status.svg)](https://david-dm.org/Ikagaka/NanikaStorage#info=devDependencies)
+
 NanikaStorageは伺かに必要なストレージを抽象化するモジュールです。
 
 Installation
 --------------------------
 
-unstable
+```
+npm install nanika-storage
+```
+
+```
+bower install nanika-storage
+```
 
 Usage
 --------------------------
@@ -341,4 +357,4 @@ dirpathのゴーストのshellpathのシェルのプロファイルのパス
 License
 --------------------------
 
-This is released under [MIT License](http://narazaka.net/license/MIT?2014).
+This is released under [MIT License](http://narazaka.net/license/MIT?2016).
