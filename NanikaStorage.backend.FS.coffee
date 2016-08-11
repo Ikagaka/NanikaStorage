@@ -101,7 +101,7 @@ class NanikaStorage.Backend.FS
 	balloon_name: (dirpath) ->
 		@balloon_install(dirpath).then (install) -> install.name
 	shell_name: (dirpath, shellpath) ->
-		@shell_descript(dirpath. shellpath).then (descript) -> descript.name
+		@shell_descript(dirpath, shellpath).then (descript) -> descript.name
 	ghost_install: (dirpath) ->
 		target = @ghost_path(dirpath)
 		@_FSFileToDirectory(target, 'install.txt').then (directory) -> directory.install

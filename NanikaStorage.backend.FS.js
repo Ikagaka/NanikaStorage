@@ -256,7 +256,7 @@
     };
 
     FS.prototype.shell_name = function(dirpath, shellpath) {
-      return this.shell_descript(dirpath.shellpath).then(function(descript) {
+      return this.shell_descript(dirpath, shellpath).then(function(descript) {
         return descript.name;
       });
     };
