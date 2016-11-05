@@ -1,0 +1,894 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>NanikaContainerSyncDirectory | API Document</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script src="../assets/js/modernizr.js"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">API Document</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_src_lib_nanika_container_directory_.html">&quot;src/lib/nanika-container-directory&quot;</a>
+				</li>
+				<li>
+					<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html">NanikaContainerSyncDirectory</a>
+				</li>
+			</ul>
+			<h1>Class NanikaContainerSyncDirectory</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>全ての子要素のstatsと内容をキャッシュした -Sync API を提供するコンテナ(ghost, balloon等)のルートディレクトリオブジェクト。</p>
+					</div>
+					<p>container root directory object which provides -Sync APIs by cache all children&#39;s stats and contents.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">NanikaContainerSyncDirectory</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html" class="tsd-signature-type">HasNanikaContainerInfoDirectory</a></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#_childrenallcache" class="tsd-kind-icon">_children<wbr>All<wbr>Cache</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#_childrencache" class="tsd-kind-icon">_children<wbr>Cache</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#_indexes" class="tsd-kind-icon">_indexes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#path" class="tsd-kind-icon">path</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#_makeindexes" class="tsd-kind-icon">_make<wbr>Indexes</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#children" class="tsd-kind-icon">children</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#childrenall" class="tsd-kind-icon">children<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#childrenallsync" class="tsd-kind-icon">children<wbr>All<wbr>Sync</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#childrensync" class="tsd-kind-icon">children<wbr>Sync</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#descriptinfo" class="tsd-kind-icon">descript<wbr>Info</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#descripttxt" class="tsd-kind-icon">descript<wbr>Txt</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#filteredchildrenall" class="tsd-kind-icon">filtered<wbr>Children<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#filteredchildrenallsync" class="tsd-kind-icon">filtered<wbr>Children<wbr>All<wbr>Sync</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#installinfo" class="tsd-kind-icon">install<wbr>Info</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#installtxt" class="tsd-kind-icon">install<wbr>Txt</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#ischildof" class="tsd-kind-icon">is<wbr>Child<wbr>Of</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#isdirectory" class="tsd-kind-icon">is<wbr>Directory</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#new" class="tsd-kind-icon">new</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#relative" class="tsd-kind-icon">relative</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#tocached" class="tsd-kind-icon">to<wbr>Cached</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Nanika<wbr>Container<wbr>Sync<wbr>Directory<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, childrenAllCache<span class="tsd-signature-symbol">: </span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html" class="tsd-signature-type">NanikaContainerSyncDirectory</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L199">src/lib/nanika-container-directory.ts:199</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>path: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>パス</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>childrenAllCache: <a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>子要素全てのstatsと内容のキャッシュ</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html" class="tsd-signature-type">NanikaContainerSyncDirectory</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_childrenallcache" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _children<wbr>All<wbr>Cache</h3>
+					<div class="tsd-signature tsd-kind-icon">_children<wbr>All<wbr>Cache<span class="tsd-signature-symbol">:</span> <a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L198">src/lib/nanika-container-directory.ts:198</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_childrencache" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _children<wbr>Cache</h3>
+					<div class="tsd-signature tsd-kind-icon">_children<wbr>Cache<span class="tsd-signature-symbol">:</span> <a href="../modules/_src_lib_nanika_container_directory_.html#nanikastoragesyncentry" class="tsd-signature-type">NanikaStorageSyncEntry</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L197">src/lib/nanika-container-directory.ts:197</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_indexes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _indexes</h3>
+					<div class="tsd-signature tsd-kind-icon">_indexes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L199">src/lib/nanika-container-directory.ts:199</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>path: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="path" class="tsd-anchor"></a>
+					<h3>path</h3>
+					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L195">src/lib/nanika-container-directory.ts:195</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="_makeindexes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _make<wbr>Indexes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">_make<wbr>Indexes<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L321">src/lib/nanika-container-directory.ts:321</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="children" class="tsd-anchor"></a>
+					<h3>children</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol"> | </span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html" class="tsd-signature-type">NanikaContainerSyncDirectory</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#children">children</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L250">src/lib/nanika-container-directory.ts:250</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol"> | </span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html" class="tsd-signature-type">NanikaContainerSyncDirectory</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="childrenall" class="tsd-anchor"></a>
+					<h3>children<wbr>All</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">children<wbr>All<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#childrenall">childrenAll</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L258">src/lib/nanika-container-directory.ts:258</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="childrenallsync" class="tsd-anchor"></a>
+					<h3>children<wbr>All<wbr>Sync</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">children<wbr>All<wbr>Sync<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L254">src/lib/nanika-container-directory.ts:254</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="childrensync" class="tsd-anchor"></a>
+					<h3>children<wbr>Sync</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">children<wbr>Sync<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol"> | </span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html" class="tsd-signature-type">NanikaContainerSyncDirectory</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L242">src/lib/nanika-container-directory.ts:242</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol"> | </span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html" class="tsd-signature-type">NanikaContainerSyncDirectory</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="descriptinfo" class="tsd-anchor"></a>
+					<h3>descript<wbr>Info</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">descript<wbr>Info<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"ghost"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.ghost.html" class="tsd-signature-type">Ghost</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">descript<wbr>Info<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"balloon"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.balloon.html" class="tsd-signature-type">Balloon</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">descript<wbr>Info<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"shell"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.shell.html" class="tsd-signature-type">Shell</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">descript<wbr>Info<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"plugin"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.plugin.html" class="tsd-signature-type">Plugin</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">descript<wbr>Info<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"headline"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.headline.html" class="tsd-signature-type">Headline</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">descript<wbr>Info<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"calendar.skin"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.calendarskin.html" class="tsd-signature-type">CalendarSkin</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">descript<wbr>Info<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"calendar.plugin"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.calendarplugin.html" class="tsd-signature-type">CalendarPlugin</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">descript<wbr>Info<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.html" class="tsd-signature-type">UkagakaDescriptInfo</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#descriptinfo">descriptInfo</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L302">src/lib/nanika-container-directory.ts:302</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">"ghost"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.ghost.html" class="tsd-signature-type">Ghost</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#descriptinfo">descriptInfo</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L303">src/lib/nanika-container-directory.ts:303</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">"balloon"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.balloon.html" class="tsd-signature-type">Balloon</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#descriptinfo">descriptInfo</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L304">src/lib/nanika-container-directory.ts:304</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">"shell"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.shell.html" class="tsd-signature-type">Shell</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#descriptinfo">descriptInfo</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L305">src/lib/nanika-container-directory.ts:305</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">"plugin"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.plugin.html" class="tsd-signature-type">Plugin</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#descriptinfo">descriptInfo</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L306">src/lib/nanika-container-directory.ts:306</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">"headline"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.headline.html" class="tsd-signature-type">Headline</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#descriptinfo">descriptInfo</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L307">src/lib/nanika-container-directory.ts:307</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">"calendar.skin"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.calendarskin.html" class="tsd-signature-type">CalendarSkin</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#descriptinfo">descriptInfo</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L308">src/lib/nanika-container-directory.ts:308</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">"calendar.plugin"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.calendarplugin.html" class="tsd-signature-type">CalendarPlugin</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#descriptinfo">descriptInfo</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L309">src/lib/nanika-container-directory.ts:309</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakadescriptinfo.html" class="tsd-signature-type">UkagakaDescriptInfo</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="descripttxt" class="tsd-anchor"></a>
+					<h3>descript<wbr>Txt</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">descript<wbr>Txt<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol"> | </span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html" class="tsd-signature-type">NanikaContainerSyncDirectory</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L219">src/lib/nanika-container-directory.ts:219</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html" class="tsd-signature-type">NanikaContainerSyncDirectory</a>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="filteredchildrenall" class="tsd-anchor"></a>
+					<h3>filtered<wbr>Children<wbr>All</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">filtered<wbr>Children<wbr>All<span class="tsd-signature-symbol">(</span>excepts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L262">src/lib/nanika-container-directory.ts:262</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>excepts: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="filteredchildrenallsync" class="tsd-anchor"></a>
+					<h3>filtered<wbr>Children<wbr>All<wbr>Sync</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">filtered<wbr>Children<wbr>All<wbr>Sync<span class="tsd-signature-symbol">(</span>excepts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L266">src/lib/nanika-container-directory.ts:266</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>excepts: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="installinfo" class="tsd-anchor"></a>
+					<h3>install<wbr>Info</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">install<wbr>Info<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakainstallinfo.html" class="tsd-signature-type">UkagakaInstallInfo</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#installinfo">installInfo</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L296">src/lib/nanika-container-directory.ts:296</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_src_lib_ukagaka_install_descript_.ukagakainstallinfo.html" class="tsd-signature-type">UkagakaInstallInfo</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="installtxt" class="tsd-anchor"></a>
+					<h3>install<wbr>Txt</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">install<wbr>Txt<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a><span class="tsd-signature-symbol"> | </span><a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html" class="tsd-signature-type">NanikaContainerSyncDirectory</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L215">src/lib/nanika-container-directory.ts:215</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-signature-type">NanikaContainerSyncFile</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html" class="tsd-signature-type">NanikaContainerSyncDirectory</a>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ischildof" class="tsd-anchor"></a>
+					<h3>is<wbr>Child<wbr>Of</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Child<wbr>Of<span class="tsd-signature-symbol">(</span>to<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="_node_modules_fso_src_lib_fso_d_.filesystemobject.html" class="tsd-signature-type">FileSystemObject</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L288">src/lib/nanika-container-directory.ts:288</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>to: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="_node_modules_fso_src_lib_fso_d_.filesystemobject.html" class="tsd-signature-type">FileSystemObject</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="isdirectory" class="tsd-anchor"></a>
+					<h3>is<wbr>Directory</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Directory<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L223">src/lib/nanika-container-directory.ts:223</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L317">src/lib/nanika-container-directory.ts:317</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="new" class="tsd-anchor"></a>
+					<h3>new</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>paths<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_src_lib_nanika_container_directory_.html#nanikastoragesyncentry" class="tsd-signature-type">NanikaStorageSyncEntry</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#new">new</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L225">src/lib/nanika-container-directory.ts:225</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>paths: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/_src_lib_nanika_container_directory_.html#nanikastoragesyncentry" class="tsd-signature-type">NanikaStorageSyncEntry</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="relative" class="tsd-anchor"></a>
+					<h3>relative</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">relative<span class="tsd-signature-symbol">(</span>to<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="_node_modules_fso_src_lib_fso_d_.filesystemobject.html" class="tsd-signature-type">FileSystemObject</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_node_modules_fso_src_lib_fso_d_.filesystemobject.html" class="tsd-signature-type">FileSystemObject</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#relative">relative</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L284">src/lib/nanika-container-directory.ts:284</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>to: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="_node_modules_fso_src_lib_fso_d_.filesystemobject.html" class="tsd-signature-type">FileSystemObject</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_node_modules_fso_src_lib_fso_d_.filesystemobject.html" class="tsd-signature-type">FileSystemObject</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="tocached" class="tsd-anchor"></a>
+					<h3>to<wbr>Cached</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Cached<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#tocached">toCached</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L292">src/lib/nanika-container-directory.ts:292</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="tostring" class="tsd-anchor"></a>
+					<h3>to<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html">HasNanikaContainerInfoDirectory</a>.<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html#tostring">toString</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Ikagaka/NanikaStorage/blob/8f8de04/src/lib/nanika-container-directory.ts#L211">src/lib/nanika-container-directory.ts:211</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Internals</span>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_src_lib_nanika_container_directory_.html">"src/lib/nanika-<wbr>container-<wbr>directory"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_src_lib_nanika_storage_.html">"src/lib/nanika-<wbr>storage"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_src_lib_ukagaka_install_descript_.html">"src/lib/ukagaka-<wbr>install-<wbr>descript"</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="../modules/_node_modules__types_node_index_d_.html">"node_<wbr>modules/@types/node/index.d"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="../modules/_node_modules_fso_src_lib_fso_d_.html">"node_<wbr>modules/fso/src/lib/fso.d"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_src_lib_nanika_container_directory_.nanikabasedirectory.html" class="tsd-kind-icon">Nanika<wbr>Base<wbr>Directory</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_src_lib_nanika_container_directory_.nanikacontainerdirectory.html" class="tsd-kind-icon">Nanika<wbr>Container<wbr>Directory</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html" class="tsd-kind-icon">Nanika<wbr>Container<wbr>Sync<wbr>Directory</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#_childrenallcache" class="tsd-kind-icon">_children<wbr>All<wbr>Cache</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#_childrencache" class="tsd-kind-icon">_children<wbr>Cache</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#_indexes" class="tsd-kind-icon">_indexes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#path" class="tsd-kind-icon">path</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#_makeindexes" class="tsd-kind-icon">_make<wbr>Indexes</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#children" class="tsd-kind-icon">children</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#childrenall" class="tsd-kind-icon">children<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#childrenallsync" class="tsd-kind-icon">children<wbr>All<wbr>Sync</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#childrensync" class="tsd-kind-icon">children<wbr>Sync</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#descriptinfo" class="tsd-kind-icon">descript<wbr>Info</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#descripttxt" class="tsd-kind-icon">descript<wbr>Txt</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#filteredchildrenall" class="tsd-kind-icon">filtered<wbr>Children<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#filteredchildrenallsync" class="tsd-kind-icon">filtered<wbr>Children<wbr>All<wbr>Sync</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#installinfo" class="tsd-kind-icon">install<wbr>Info</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#installtxt" class="tsd-kind-icon">install<wbr>Txt</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#ischildof" class="tsd-kind-icon">is<wbr>Child<wbr>Of</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#isdirectory" class="tsd-kind-icon">is<wbr>Directory</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#new" class="tsd-kind-icon">new</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#relative" class="tsd-kind-icon">relative</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#tocached" class="tsd-kind-icon">to<wbr>Cached</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_src_lib_nanika_container_directory_.nanikacontainersyncdirectory.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_src_lib_nanika_container_directory_.nanikacontainersyncfile.html" class="tsd-kind-icon">Nanika<wbr>Container<wbr>Sync<wbr>File</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_src_lib_nanika_container_directory_.hasnanikacontainerinfodirectory.html" class="tsd-kind-icon">Has<wbr>Nanika<wbr>Container<wbr>Info<wbr>Directory</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/_src_lib_nanika_container_directory_.html#nanikastoragesyncentry" class="tsd-kind-icon">Nanika<wbr>Storage<wbr>Sync<wbr>Entry</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/_src_lib_nanika_container_directory_.html#profile" class="tsd-kind-icon">Profile</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
