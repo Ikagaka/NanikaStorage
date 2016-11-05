@@ -10,7 +10,6 @@
         "noImplicitUseStrict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
         "strictNullChecks": true
