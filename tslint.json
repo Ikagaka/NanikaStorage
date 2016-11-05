@@ -1,0 +1,16 @@
+{
+    "extends": [
+        "tslint:recommended"
+    ],
+    "rules": {
+        "member-access": [
+            false
+        ],
+        "interface-name": [
+            false
+        ],
+        "curly": false,
+        "switch-default": false,
+        "no-namespace": false
+    }
+}
