@@ -529,7 +529,7 @@ export class NanikaGhostDirectory extends NanikaContainerDirectory {
 
   /** "descript.txt" の内容 */
   descriptInfo(): Promise<UkagakaDescriptInfo.Ghost> { // UkagakaDescriptInfoをimportしないとエラーかつ書かないとエラーなので
-    return super.descriptInfo("ghost");
+    return super.descriptInfoByType("ghost");
   }
 }
 
@@ -541,7 +541,7 @@ export class NanikaGhostMasterDirectory extends NanikaContainerDirectory {
 
   /** "descript.txt" の内容 */
   descriptInfo() {
-    return super.descriptInfo("ghost");
+    return super.descriptInfoByType("ghost");
   }
 }
 
@@ -553,7 +553,7 @@ export class NanikaBalloonDirectory extends NanikaContainerDirectory {
 
   /** "descript.txt" の内容 */
   descriptInfo() {
-    return super.descriptInfo("balloon");
+    return super.descriptInfoByType("balloon");
   }
 }
 
@@ -565,7 +565,7 @@ export class NanikaShellDirectory extends NanikaContainerDirectory {
 
   /** "descript.txt" の内容 */
   descriptInfo() {
-    return super.descriptInfo("shell");
+    return super.descriptInfoByType("shell");
   }
 }
 
@@ -577,7 +577,7 @@ export class NanikaPluginDirectory extends NanikaContainerDirectory {
 
   /** "descript.txt" の内容 */
   descriptInfo() {
-    return super.descriptInfo("plugin");
+    return super.descriptInfoByType("plugin");
   }
 }
 
@@ -589,7 +589,7 @@ export class NanikaHeadlineDirectory extends NanikaContainerDirectory {
 
   /** "descript.txt" の内容 */
   descriptInfo() {
-    return super.descriptInfo("headline");
+    return super.descriptInfoByType("headline");
   }
 }
 
@@ -601,7 +601,7 @@ export class NanikaCalendarSkinDirectory extends NanikaContainerDirectory {
 
   /** "descript.txt" の内容 */
   descriptInfo() {
-    return super.descriptInfo("calendar.skin");
+    return super.descriptInfoByType("calendar.skin");
   }
 }
 
@@ -613,6 +613,6 @@ export class NanikaCalendarPluginDirectory extends NanikaContainerDirectory {
 
   /** "descript.txt" の内容 */
   descriptInfo() {
-    return super.descriptInfo("calendar.plugin");
+    return super.descriptInfoByType("calendar.plugin");
   }
 }

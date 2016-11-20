@@ -157,15 +157,15 @@ export class UkagakaInstallInfo {
 
 /** "descript.txt" の内容 */
 export class UkagakaDescriptInfo {
-  static parse(type: "ghost", data: string | Buffer): UkagakaDescriptInfo.Ghost;
-  static parse(type: "balloon", data: string | Buffer): UkagakaDescriptInfo.Balloon;
-  static parse(type: "shell", data: string | Buffer): UkagakaDescriptInfo.Shell;
-  static parse(type: "plugin", data: string | Buffer): UkagakaDescriptInfo.Plugin;
-  static parse(type: "headline", data: string | Buffer): UkagakaDescriptInfo.Headline;
-  static parse(type: "calendar.skin", data: string | Buffer): UkagakaDescriptInfo.CalendarSkin;
-  static parse(type: "calendar.plugin", data: string | Buffer): UkagakaDescriptInfo.CalendarPlugin;
-  static parse(type: undefined, data: string | Buffer): UkagakaDescriptInfo;
-  static parse(type: UkagakaContainerStandaloneType | undefined, data: string | Buffer) {
+  static parse(data: string | Buffer, type: "ghost"): UkagakaDescriptInfo.Ghost;
+  static parse(data: string | Buffer, type: "balloon"): UkagakaDescriptInfo.Balloon;
+  static parse(data: string | Buffer, type: "shell"): UkagakaDescriptInfo.Shell;
+  static parse(data: string | Buffer, type: "plugin"): UkagakaDescriptInfo.Plugin;
+  static parse(data: string | Buffer, type: "headline"): UkagakaDescriptInfo.Headline;
+  static parse(data: string | Buffer, type: "calendar.skin"): UkagakaDescriptInfo.CalendarSkin;
+  static parse(data: string | Buffer, type: "calendar.plugin"): UkagakaDescriptInfo.CalendarPlugin;
+  static parse(data: string | Buffer): UkagakaDescriptInfo;
+  static parse(data: string | Buffer, type?: UkagakaContainerStandaloneType) {
     if (data instanceof Buffer) data = UkagakaDescriptInfo._bufferToString(data);
     const lines = data.split(/\r\n|\n|\r/).filter((line) => /^\s*$/.test(line));
     let info: UkagakaDescriptInfo;

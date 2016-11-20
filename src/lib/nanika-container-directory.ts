@@ -24,37 +24,37 @@ export interface HasNanikaContainerInfoDirectory {
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  descriptInfo(type: "ghost"): Promise<UkagakaDescriptInfo.Ghost>;
+  descriptInfoByType(type: "ghost"): Promise<UkagakaDescriptInfo.Ghost>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  descriptInfo(type: "shell"): Promise<UkagakaDescriptInfo.Shell>;
+  descriptInfoByType(type: "shell"): Promise<UkagakaDescriptInfo.Shell>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  descriptInfo(type: "balloon"): Promise<UkagakaDescriptInfo.Balloon>;
+  descriptInfoByType(type: "balloon"): Promise<UkagakaDescriptInfo.Balloon>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  descriptInfo(type: "plugin"): Promise<UkagakaDescriptInfo.Plugin>;
+  descriptInfoByType(type: "plugin"): Promise<UkagakaDescriptInfo.Plugin>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  descriptInfo(type: "headline"): Promise<UkagakaDescriptInfo.Headline>;
+  descriptInfoByType(type: "headline"): Promise<UkagakaDescriptInfo.Headline>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  descriptInfo(type: "calendar.skin"): Promise<UkagakaDescriptInfo.CalendarSkin>;
+  descriptInfoByType(type: "calendar.skin"): Promise<UkagakaDescriptInfo.CalendarSkin>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  descriptInfo(type: "calendar.plugin"): Promise<UkagakaDescriptInfo.CalendarPlugin>;
+  descriptInfoByType(type: "calendar.plugin"): Promise<UkagakaDescriptInfo.CalendarPlugin>;
   /**
    * "descript.txt" の内容
    */
@@ -138,42 +138,47 @@ export abstract class NanikaContainerDirectory extends NanikaBaseDirectory imple
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  async descriptInfo(type: "ghost"): Promise<UkagakaDescriptInfo.Ghost>;
+  async descriptInfoByType(type: "ghost"): Promise<UkagakaDescriptInfo.Ghost>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  async descriptInfo(type: "balloon"): Promise<UkagakaDescriptInfo.Balloon>;
+  async descriptInfoByType(type: "balloon"): Promise<UkagakaDescriptInfo.Balloon>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  async descriptInfo(type: "shell"): Promise<UkagakaDescriptInfo.Shell>;
+  async descriptInfoByType(type: "shell"): Promise<UkagakaDescriptInfo.Shell>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  async descriptInfo(type: "plugin"): Promise<UkagakaDescriptInfo.Plugin>;
+  async descriptInfoByType(type: "plugin"): Promise<UkagakaDescriptInfo.Plugin>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  async descriptInfo(type: "headline"): Promise<UkagakaDescriptInfo.Headline>;
+  async descriptInfoByType(type: "headline"): Promise<UkagakaDescriptInfo.Headline>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  async descriptInfo(type: "calendar.skin"): Promise<UkagakaDescriptInfo.CalendarSkin>;
+  async descriptInfoByType(type: "calendar.skin"): Promise<UkagakaDescriptInfo.CalendarSkin>;
   /**
    * "descript.txt" の内容
    * @param type コンテナの種類
    */
-  async descriptInfo(type: "calendar.plugin"): Promise<UkagakaDescriptInfo.CalendarPlugin>;
+  async descriptInfoByType(type: "calendar.plugin"): Promise<UkagakaDescriptInfo.CalendarPlugin>;
+  async descriptInfoByType(type: UkagakaContainerStandaloneType) {
+    return <UkagakaDescriptInfo> UkagakaDescriptInfo.parse(
+      await this.descriptTxt().readFile(),
+      <"ghost"> type // TODO: Narazaka: 他に方法あるかな？
+    );
+  }
+
   /** "descript.txt" の内容 */
-  async descriptInfo(): Promise<UkagakaDescriptInfo>;
-  async descriptInfo(type?: UkagakaContainerStandaloneType) {
+  async descriptInfo() {
     return UkagakaDescriptInfo.parse(
-      <"ghost"> type, // TODO: Narazaka: 他に方法あるかな？
       await this.descriptTxt().readFile()
     );
   }
@@ -299,17 +304,22 @@ export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirec
     );
   }
 
-  async descriptInfo(type: "ghost"): Promise<UkagakaDescriptInfo.Ghost>;
-  async descriptInfo(type: "balloon"): Promise<UkagakaDescriptInfo.Balloon>;
-  async descriptInfo(type: "shell"): Promise<UkagakaDescriptInfo.Shell>;
-  async descriptInfo(type: "plugin"): Promise<UkagakaDescriptInfo.Plugin>;
-  async descriptInfo(type: "headline"): Promise<UkagakaDescriptInfo.Headline>;
-  async descriptInfo(type: "calendar.skin"): Promise<UkagakaDescriptInfo.CalendarSkin>;
-  async descriptInfo(type: "calendar.plugin"): Promise<UkagakaDescriptInfo.CalendarPlugin>;
-  async descriptInfo(): Promise<UkagakaDescriptInfo>;
-  async descriptInfo(type?: UkagakaContainerStandaloneType) {
-    return UkagakaDescriptInfo.parse(
-      <"ghost"> type, // TODO: Narazaka: 他に方法あるかな？
+  async descriptInfoByType(type: "ghost"): Promise<UkagakaDescriptInfo.Ghost>;
+  async descriptInfoByType(type: "balloon"): Promise<UkagakaDescriptInfo.Balloon>;
+  async descriptInfoByType(type: "shell"): Promise<UkagakaDescriptInfo.Shell>;
+  async descriptInfoByType(type: "plugin"): Promise<UkagakaDescriptInfo.Plugin>;
+  async descriptInfoByType(type: "headline"): Promise<UkagakaDescriptInfo.Headline>;
+  async descriptInfoByType(type: "calendar.skin"): Promise<UkagakaDescriptInfo.CalendarSkin>;
+  async descriptInfoByType(type: "calendar.plugin"): Promise<UkagakaDescriptInfo.CalendarPlugin>;
+  async descriptInfoByType(type: UkagakaContainerStandaloneType) {
+    return <UkagakaDescriptInfo> UkagakaDescriptInfo.parse(
+      (<NanikaContainerSyncFile> this.descriptTxt()).readFileSync(),
+      <"ghost"> type // TODO: Narazaka: 他に方法あるかな？
+    );
+  }
+
+  async descriptInfo() {
+    return <UkagakaDescriptInfo> UkagakaDescriptInfo.parse(
       (<NanikaContainerSyncFile> this.descriptTxt()).readFileSync()
     );
   }
