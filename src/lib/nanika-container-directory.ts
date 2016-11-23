@@ -9,15 +9,13 @@ import {UkagakaInstallInfo, UkagakaDescriptInfo, UkagakaContainerStandaloneType}
 
 /** the profile */
 export type Profile = {[key: string]: any};
-/** directory object which provides -Sync APIs */
-export type NanikaStorageSyncEntry = NanikaContainerSyncFile | NanikaContainerSyncDirectory;
 
 /** コンテナ(ghost, balloon等)の情報を取得できるディレクトリオブジェクト */
 export interface HasNanikaContainerInfoDirectory {
   toString(): string;
-  ["new"](...paths: string[]): FileSystemObject | NanikaStorageSyncEntry;
-  children(): Promise<(FileSystemObject | NanikaStorageSyncEntry)[]>;
-  childrenAll(): Promise<(FileSystemObject | NanikaStorageSyncEntry)[]>;
+  ["new"](...paths: string[]): FileSystemObject | NanikaContainerSyncDirectory | NanikaContainerSyncFile;
+  children(): Promise<(FileSystemObject | NanikaContainerSyncDirectory | NanikaContainerSyncFile)[]>;
+  childrenAll(): Promise<(FileSystemObject | NanikaContainerSyncDirectory | NanikaContainerSyncFile)[]>;
   /** "install.txt" の内容 */
   installInfo(): Promise<UkagakaInstallInfo>;
   /**
@@ -191,15 +189,75 @@ export abstract class NanikaContainerDirectory extends NanikaBaseDirectory imple
 
 const childRe = new RegExp(`^\\.\\.(?:\\${path.sep}\\.\\.)*$`);
 
+/** directory object which provides -Sync APIs */
+export abstract class NanikaContainerSyncEntry {
+  static format(pathObject: path.ParsedPath) {
+    return new FileSystemObject(path.format(pathObject));
+  }
+
+  path: string;
+
+  constructor(path: string) {
+    this.path = path;
+  }
+
+  toString() {
+    return this.path;
+  }
+
+  get delimiter() {
+    return path.delimiter;
+  }
+
+  get sep() {
+    return path.sep;
+  }
+
+  parse() {
+    return path.parse(this.path);
+  }
+
+  normalize() {
+    return this;
+  }
+
+  basename() {
+    return new FileSystemObject(path.basename(this.path));
+  }
+
+  dirname() {
+    return new FileSystemObject(path.dirname(this.path));
+  }
+
+  extname() {
+    return path.extname(this.path);
+  }
+
+  isAbsolute() {
+    return path.isAbsolute(this.path);
+  }
+
+  relative(to: string | FileSystemObject) {
+    return new FileSystemObject(path.relative(this.path, to.toString()));
+  }
+
+  resolve(...paths: (string | FileSystemObject)[]) {
+    return new FileSystemObject(path.resolve(...paths.map((_path) => _path.toString()).concat([this.path])));
+  }
+
+  isChildOf(to: string | FileSystemObject) {
+    return childRe.test(path.relative(this.path, to.toString()));
+  }
+}
+
 /**
  * 全ての子要素のstatsと内容をキャッシュした -Sync API を提供するコンテナ(ghost, balloon等)のルートディレクトリオブジェクト。
  *
  * container root directory object which provides -Sync APIs by cache all children's stats and contents.
  */
-export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirectory {
-  path: string;
+export class NanikaContainerSyncDirectory extends NanikaContainerSyncEntry implements HasNanikaContainerInfoDirectory {
 
-  private _childrenCache: NanikaStorageSyncEntry[];
+  private _childrenCache: NanikaContainerSyncEntry[];
   private _childrenAllCache: NanikaContainerSyncFile[];
   private _indexes: {[path: string]: number} = {};
 
@@ -208,13 +266,9 @@ export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirec
    * @param childrenAllCache 子要素全てのstatsと内容のキャッシュ
    */
   constructor(path: string, childrenAllCache: NanikaContainerSyncFile[]) {
-    this.path = path;
+    super(path);
     this._childrenAllCache = childrenAllCache;
     this._makeIndexes();
-  }
-
-  toString() {
-    return this.path;
   }
 
   installTxt() {
@@ -233,7 +287,7 @@ export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirec
   async exists() { return true; }
   existsSync() { return true; }
 
-  new(...paths: string[]): NanikaStorageSyncEntry {
+  new(...paths: string[]): NanikaContainerSyncDirectory | NanikaContainerSyncFile {
     const newPath = path.join(this.path, ...paths);
     const index = this._indexes[newPath];
     if (index == null) {
@@ -254,7 +308,7 @@ export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirec
     if (this._childrenCache) return this._childrenCache;
     this._childrenCache = this._childrenAllCache
       .filter((child) => !/[\/\\]/.test(child.toString()))
-      .map((child) => child.isDirectorySync() ? this.new(child.basename()) : child);
+      .map((child) => child.isDirectorySync() ? this.new(child.basename().toString()) : child);
     return this._childrenCache;
   }
 
@@ -290,14 +344,6 @@ export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirec
     } else {
       return (this.childrenAllSync()).filter(excepts);
     }
-  }
-
-  relative(to: string | FileSystemObject) {
-    return new FileSystemObject(path.relative(this.path, to.toString()));
-  }
-
-  isChildOf(to: string | FileSystemObject) {
-    return childRe.test(path.relative(this.path, to.toString()));
   }
 
   async toCached() {
@@ -369,7 +415,7 @@ export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirec
  *
  * entry object which provides -Sync APIs by cache all children's stats and contents.
  */
-export class NanikaContainerSyncFile {
+export class NanikaContainerSyncFile extends NanikaContainerSyncEntry {
   path: string;
   private _content: Buffer | null;
   private _stats: fs.Stats | null;
@@ -380,13 +426,9 @@ export class NanikaContainerSyncFile {
    * @param stats statsのキャッシュ
    */
   constructor(path: string, content: Buffer | null = null, stats: fs.Stats | null = null) {
-    this.path = path;
+    super(path);
     this._content = content;
     this._stats = stats;
-  }
-
-  toString() {
-    return this.path;
   }
 
   lstatSync() {
@@ -436,17 +478,5 @@ export class NanikaContainerSyncFile {
     arg: undefined | string | { encoding: string; flag?: string; } | { flag?: string; }
   ): Promise<string | Buffer> {
     return this.readFileSync(arg);
-  }
-
-  basename() {
-    return path.basename(this.path);
-  }
-
-  relative(to: string | {toString(): string}) {
-    return new FileSystemObject(path.relative(this.path, to.toString()));
-  }
-
-  isChildOf(to: string | FileSystemObject) {
-    return childRe.test(path.relative(this.path, to.toString()));
   }
 }

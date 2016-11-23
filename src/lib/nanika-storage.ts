@@ -15,7 +15,7 @@ import {
 
 import {
   Profile,
-  NanikaStorageSyncEntry,
+  NanikaContainerSyncEntry,
   HasNanikaContainerInfoDirectory,
   NanikaBaseDirectory,
   NanikaContainerDirectory,
@@ -25,7 +25,7 @@ import {
 
 export {
   Profile,
-  NanikaStorageSyncEntry,
+  NanikaContainerSyncEntry,
   HasNanikaContainerInfoDirectory,
   NanikaBaseDirectory,
   NanikaContainerDirectory,
