@@ -230,6 +230,9 @@ export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirec
   async isFile() { return false; }
   isFileSync() { return false; }
 
+  async exists() { return true; }
+  existsSync() { return true; }
+
   new(...paths: string[]): NanikaStorageSyncEntry {
     const newPath = path.join(this.path, ...paths);
     const index = this._indexes[newPath];
@@ -407,6 +410,9 @@ export class NanikaContainerSyncFile {
   async isSymbolicLink() { return this.isSymbolicLinkSync(); }
   async isFIFO() { return this.isFIFOSync(); }
   async isSocket() { return this.isSocketSync(); }
+
+  async exists() { return this.existsSync(); }
+  existsSync() { return Boolean(this._content); }
 
   readFileSync(encoding: string): string;
   readFileSync(options: { encoding: string; flag?: string; }): string;
