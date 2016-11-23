@@ -5,7 +5,7 @@
 import * as fs from "fs";
 import {FileSystemObject} from "fso";
 import * as path from "path";
-import {UkagakaInstallInfo, UkagakaDescriptInfo, UkagakaContainerStandaloneType} from "./ukagaka-install-descript";
+import {UkagakaInstallInfo, UkagakaDescriptInfo, UkagakaContainerStandaloneType} from "ukagaka-install-descript-info";
 
 /** the profile */
 export type Profile = {[key: string]: any};

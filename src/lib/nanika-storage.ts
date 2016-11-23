@@ -16,7 +16,7 @@ import {
   UkagakaContainerChildType,
   UkagakaContainerChildTypes,
   UkagakaContainerStandaloneType,
-} from "./ukagaka-install-descript";
+} from "ukagaka-install-descript-info";
 
 /** インストール結果 */
 export type NanikaStorageInstallResult = {
