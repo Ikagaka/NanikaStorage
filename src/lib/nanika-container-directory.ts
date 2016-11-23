@@ -299,6 +299,10 @@ export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirec
   }
 
   async installInfo() {
+    return this.installInfoSync();
+  }
+
+  installInfoSync() {
     return UkagakaInstallInfo.parse(
       (<NanikaContainerSyncFile> this.installTxt()).readFileSync()
     );
@@ -312,13 +316,28 @@ export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirec
   async descriptInfoByType(type: "calendar.skin"): Promise<UkagakaDescriptInfo.CalendarSkin>;
   async descriptInfoByType(type: "calendar.plugin"): Promise<UkagakaDescriptInfo.CalendarPlugin>;
   async descriptInfoByType(type: UkagakaContainerStandaloneType) {
+    return <UkagakaDescriptInfo> this.descriptInfoByTypeSync(<"ghost"> type);
+  }
+
+  async descriptInfo() {
+    return this.descriptInfoSync();
+  }
+
+  descriptInfoByTypeSync(type: "ghost"): UkagakaDescriptInfo.Ghost;
+  descriptInfoByTypeSync(type: "balloon"): UkagakaDescriptInfo.Balloon;
+  descriptInfoByTypeSync(type: "shell"): UkagakaDescriptInfo.Shell;
+  descriptInfoByTypeSync(type: "plugin"): UkagakaDescriptInfo.Plugin;
+  descriptInfoByTypeSync(type: "headline"): UkagakaDescriptInfo.Headline;
+  descriptInfoByTypeSync(type: "calendar.skin"): UkagakaDescriptInfo.CalendarSkin;
+  descriptInfoByTypeSync(type: "calendar.plugin"): UkagakaDescriptInfo.CalendarPlugin;
+  descriptInfoByTypeSync(type: UkagakaContainerStandaloneType) {
     return <UkagakaDescriptInfo> UkagakaDescriptInfo.parse(
       (<NanikaContainerSyncFile> this.descriptTxt()).readFileSync(),
       <"ghost"> type // TODO: Narazaka: 他に方法あるかな？
     );
   }
 
-  async descriptInfo() {
+  descriptInfoSync() {
     return <UkagakaDescriptInfo> UkagakaDescriptInfo.parse(
       (<NanikaContainerSyncFile> this.descriptTxt()).readFileSync()
     );
@@ -326,6 +345,10 @@ export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirec
 
   async name() {
     return (await this.descriptInfo()).name;
+  }
+
+  nameSync() {
+    return this.descriptInfoSync().name;
   }
 
   private _makeIndexes() {
