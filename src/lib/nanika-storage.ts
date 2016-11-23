@@ -5,11 +5,6 @@
 import {FileSystemObject} from "fso";
 
 import {
-  NanikaBaseDirectory,
-  NanikaContainerDirectory,
-  HasNanikaContainerInfoDirectory,
-} from "./nanika-container-directory";
-import {
   UkagakaInstallInfo,
   UkagakaDescriptInfo,
   UkagakaContainerType,
@@ -17,6 +12,26 @@ import {
   UkagakaContainerChildTypes,
   UkagakaContainerStandaloneType,
 } from "ukagaka-install-descript-info";
+
+import {
+  Profile,
+  NanikaStorageSyncEntry,
+  HasNanikaContainerInfoDirectory,
+  NanikaBaseDirectory,
+  NanikaContainerDirectory,
+  NanikaContainerSyncDirectory,
+  NanikaContainerSyncFile,
+} from "./nanika-container-directory";
+
+export {
+  Profile,
+  NanikaStorageSyncEntry,
+  HasNanikaContainerInfoDirectory,
+  NanikaBaseDirectory,
+  NanikaContainerDirectory,
+  NanikaContainerSyncDirectory,
+  NanikaContainerSyncFile,
+};
 
 /** インストール結果 */
 export type NanikaStorageInstallResult = {
