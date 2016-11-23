@@ -226,6 +226,9 @@ export class NanikaContainerSyncDirectory implements HasNanikaContainerInfoDirec
   }
 
   async isDirectory() { return true; }
+  isDirectorySync() { return true; }
+  async isFile() { return false; }
+  isFileSync() { return false; }
 
   new(...paths: string[]): NanikaStorageSyncEntry {
     const newPath = path.join(this.path, ...paths);
