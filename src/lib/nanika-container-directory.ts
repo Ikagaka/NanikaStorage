@@ -101,7 +101,7 @@ export abstract class NanikaBaseDirectory extends FileSystemObject {
     const children = await this.childrenAll();
     const contents =
       await Promise.all(children.map(async (child) =>
-        child.isDirectory() ? undefined : child.readFile()
+        (await child.isDirectory()) ? undefined : child.readFile()
       ));
     const stats = await Promise.all(children.map((child) => child.stat()));
     return new NanikaContainerSyncDirectory(
