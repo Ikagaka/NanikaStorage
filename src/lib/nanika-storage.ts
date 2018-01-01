@@ -238,7 +238,7 @@ export class NanikaStorage extends NanikaBaseDirectory {
 
   /** ゴースト名全部 */
   async ghostNames() {
-    return Promise.all((await this.ghosts()).map((child) => child.name()));
+    return Promise.all((await this.ghosts()).map((child) => child.master().name()));
   }
 
   /** バルーン名全部 */
