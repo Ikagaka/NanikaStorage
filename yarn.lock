@@ -2099,7 +2099,7 @@ fsevents@^1.0.0:
     nan "^2.3.0"
     node-pre-gyp "^0.6.29"
 
-fso@^2.5.7:
+fso@^2.5.13:
   version "2.5.13"
   resolved "https://registry.yarnpkg.com/fso/-/fso-2.5.13.tgz#d5a8c0b6cdea149d2eddf7072abff2228784d533"
 
