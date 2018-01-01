@@ -257,7 +257,7 @@ export abstract class NanikaContainerSyncEntry {
  */
 export class NanikaContainerSyncDirectory extends NanikaContainerSyncEntry implements HasNanikaContainerInfoDirectory {
 
-  private _childrenCache: NanikaContainerSyncEntry[];
+  private _childrenCache: (NanikaContainerSyncDirectory | NanikaContainerSyncFile)[];
   private _childrenAllCache: NanikaContainerSyncFile[];
   private _indexes: {[path: string]: number} = {};
 
@@ -477,6 +477,6 @@ export class NanikaContainerSyncFile extends NanikaContainerSyncEntry {
   async readFile(
     arg: undefined | string | { encoding: string; flag?: string; } | { flag?: string; }
   ): Promise<string | Buffer> {
-    return this.readFileSync(arg);
+    return this.readFileSync(arg as string);
   }
 }
