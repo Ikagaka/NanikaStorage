@@ -1,6 +1,8 @@
 [NanikaStorage - Nanika Storage](https://github.com/Ikagaka/NanikaStorage)
 ==========================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Ikagaka/NanikaStorage.svg)](https://greenkeeper.io/)
+
 [![npm](https://img.shields.io/npm/v/nanika-storage.svg)](https://www.npmjs.com/package/nanika-storage)
 [![npm license](https://img.shields.io/npm/l/nanika-storage.svg)](https://www.npmjs.com/package/nanika-storage)
 [![npm download total](https://img.shields.io/npm/dt/nanika-storage.svg)](https://www.npmjs.com/package/nanika-storage)
