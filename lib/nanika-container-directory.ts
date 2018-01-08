@@ -5,17 +5,19 @@
 import * as fs from "fs";
 import {FileSystemObject} from "fso";
 import * as path from "path";
-import {UkagakaInstallInfo, UkagakaDescriptInfo, UkagakaContainerStandaloneType} from "ukagaka-install-descript-info";
+import {UkagakaContainerStandaloneType, UkagakaDescriptInfo, UkagakaInstallInfo} from "ukagaka-install-descript-info";
 
 /** the profile */
-export type Profile = {[key: string]: any};
+export interface Profile {
+  [key: string]: any;
+}
 
 /** コンテナ(ghost, balloon等)の情報を取得できるディレクトリオブジェクト */
 export interface HasNanikaContainerInfoDirectory {
   toString(): string;
   ["new"](...paths: string[]): FileSystemObject | NanikaContainerSyncDirectory | NanikaContainerSyncFile;
-  children(): Promise<(FileSystemObject | NanikaContainerSyncDirectory | NanikaContainerSyncFile)[]>;
-  childrenAll(): Promise<(FileSystemObject | NanikaContainerSyncDirectory | NanikaContainerSyncFile)[]>;
+  children(): Promise<Array<FileSystemObject | NanikaContainerSyncDirectory | NanikaContainerSyncFile>>;
+  childrenAll(): Promise<Array<FileSystemObject | NanikaContainerSyncDirectory | NanikaContainerSyncFile>>;
   /** "install.txt" の内容 */
   installInfo(): Promise<UkagakaInstallInfo>;
   /**
@@ -90,7 +92,7 @@ export abstract class NanikaBaseDirectory extends FileSystemObject {
     } catch (error) {
       return {};
     }
-    return data.length ? <Profile> JSON.parse(data) : <Profile> {};
+    return data.length ? JSON.parse(data) as Profile : {} as Profile;
   }
 
   /**
@@ -101,14 +103,14 @@ export abstract class NanikaBaseDirectory extends FileSystemObject {
     const children = await this.childrenAll();
     const contents =
       await Promise.all(children.map(async (child) =>
-        (await child.isDirectory()) ? undefined : child.readFile()
+        (await child.isDirectory()) ? undefined : child.readFile(),
       ));
     const stats = await Promise.all(children.map((child) => child.stat()));
     return new NanikaContainerSyncDirectory(
       this.path,
       children.map((child, index) =>
-        new NanikaContainerSyncFile(child.path, contents[index], stats[index])
-      )
+        new NanikaContainerSyncFile(child.path, contents[index], stats[index]),
+      ),
     );
   }
 }
@@ -128,7 +130,7 @@ export abstract class NanikaContainerDirectory extends NanikaBaseDirectory imple
   /** "install.txt" の内容 */
   async installInfo() {
     return UkagakaInstallInfo.parse(
-      await this.installTxt().readFile()
+      await this.installTxt().readFile(),
     );
   }
 
@@ -168,16 +170,16 @@ export abstract class NanikaContainerDirectory extends NanikaBaseDirectory imple
    */
   async descriptInfoByType(type: "calendar.plugin"): Promise<UkagakaDescriptInfo.CalendarPlugin>;
   async descriptInfoByType(type: UkagakaContainerStandaloneType) {
-    return <UkagakaDescriptInfo> UkagakaDescriptInfo.parse(
+    return UkagakaDescriptInfo.parse(
       await this.descriptTxt().readFile(),
-      <"ghost"> type // TODO: Narazaka: 他に方法あるかな？
-    );
+      type as "ghost", // TODO: Narazaka: 他に方法あるかな？
+    ) as UkagakaDescriptInfo;
   }
 
   /** "descript.txt" の内容 */
   async descriptInfo() {
     return UkagakaDescriptInfo.parse(
-      await this.descriptTxt().readFile()
+      await this.descriptTxt().readFile(),
     );
   }
 
@@ -197,7 +199,7 @@ export abstract class NanikaContainerSyncEntry {
 
   path: string;
 
-  constructor(path: string) {
+  constructor(path: string) { // tslint:disable-line no-shadowed-variable
     this.path = path;
   }
 
@@ -241,7 +243,7 @@ export abstract class NanikaContainerSyncEntry {
     return new FileSystemObject(path.relative(this.path, to.toString()));
   }
 
-  resolve(...paths: (string | FileSystemObject)[]) {
+  resolve(...paths: Array<string | FileSystemObject>) {
     return new FileSystemObject(path.resolve(...paths.map((_path) => _path.toString()).concat([this.path])));
   }
 
@@ -257,7 +259,7 @@ export abstract class NanikaContainerSyncEntry {
  */
 export class NanikaContainerSyncDirectory extends NanikaContainerSyncEntry implements HasNanikaContainerInfoDirectory {
 
-  private _childrenCache: (NanikaContainerSyncDirectory | NanikaContainerSyncFile)[];
+  private _childrenCache: Array<NanikaContainerSyncDirectory | NanikaContainerSyncFile>;
   private _childrenAllCache: NanikaContainerSyncFile[];
   private _indexes: {[path: string]: number} = {};
 
@@ -265,7 +267,7 @@ export class NanikaContainerSyncDirectory extends NanikaContainerSyncEntry imple
    * @param path パス
    * @param childrenAllCache 子要素全てのstatsと内容のキャッシュ
    */
-  constructor(path: string, childrenAllCache: NanikaContainerSyncFile[]) {
+  constructor(path: string, childrenAllCache: NanikaContainerSyncFile[]) { // tslint:disable-line no-shadowed-variable
     super(path);
     this._childrenAllCache = childrenAllCache;
     this._makeIndexes();
@@ -338,8 +340,8 @@ export class NanikaContainerSyncDirectory extends NanikaContainerSyncEntry imple
           // child path is (unrelated to || parent of) all of the except paths
           //   = !(child path is (same as || child of) at least one of the except paths)
           (child) => !exceptTargets.find(
-            (exceptTarget) => exceptTarget === child.path || child.isChildOf(exceptTarget)
-          )
+            (exceptTarget) => exceptTarget === child.path || child.isChildOf(exceptTarget),
+          ),
         );
     } else {
       return (this.childrenAllSync()).filter(excepts);
@@ -356,7 +358,7 @@ export class NanikaContainerSyncDirectory extends NanikaContainerSyncEntry imple
 
   installInfoSync() {
     return UkagakaInstallInfo.parse(
-      (<NanikaContainerSyncFile> this.installTxt()).readFileSync()
+      (this.installTxt() as NanikaContainerSyncFile).readFileSync(),
     );
   }
 
@@ -368,7 +370,7 @@ export class NanikaContainerSyncDirectory extends NanikaContainerSyncEntry imple
   async descriptInfoByType(type: "calendar.skin"): Promise<UkagakaDescriptInfo.CalendarSkin>;
   async descriptInfoByType(type: "calendar.plugin"): Promise<UkagakaDescriptInfo.CalendarPlugin>;
   async descriptInfoByType(type: UkagakaContainerStandaloneType) {
-    return <UkagakaDescriptInfo> this.descriptInfoByTypeSync(<"ghost"> type);
+    return this.descriptInfoByTypeSync(type as "ghost") as UkagakaDescriptInfo;
   }
 
   async descriptInfo() {
@@ -383,16 +385,16 @@ export class NanikaContainerSyncDirectory extends NanikaContainerSyncEntry imple
   descriptInfoByTypeSync(type: "calendar.skin"): UkagakaDescriptInfo.CalendarSkin;
   descriptInfoByTypeSync(type: "calendar.plugin"): UkagakaDescriptInfo.CalendarPlugin;
   descriptInfoByTypeSync(type: UkagakaContainerStandaloneType) {
-    return <UkagakaDescriptInfo> UkagakaDescriptInfo.parse(
-      (<NanikaContainerSyncFile> this.descriptTxt()).readFileSync(),
-      <"ghost"> type // TODO: Narazaka: 他に方法あるかな？
-    );
+    return UkagakaDescriptInfo.parse(
+      (this.descriptTxt() as NanikaContainerSyncFile).readFileSync(),
+      type as "ghost", // TODO: Narazaka: 他に方法あるかな？
+    ) as UkagakaDescriptInfo;
   }
 
   descriptInfoSync() {
-    return <UkagakaDescriptInfo> UkagakaDescriptInfo.parse(
-      (<NanikaContainerSyncFile> this.descriptTxt()).readFileSync()
-    );
+    return UkagakaDescriptInfo.parse(
+      (this.descriptTxt() as NanikaContainerSyncFile).readFileSync(),
+    ) as UkagakaDescriptInfo;
   }
 
   async name() {
@@ -425,6 +427,7 @@ export class NanikaContainerSyncFile extends NanikaContainerSyncEntry {
    * @param content 内容のキャッシュ
    * @param stats statsのキャッシュ
    */
+  // tslint:disable-next-line no-shadowed-variable
   constructor(path: string, content: Buffer | null = null, stats: fs.Stats | null = null) {
     super(path);
     this._content = content;
@@ -457,25 +460,25 @@ export class NanikaContainerSyncFile extends NanikaContainerSyncEntry {
   existsSync() { return Boolean(this._content); }
 
   readFileSync(encoding: string): string;
-  readFileSync(options: { encoding: string; flag?: string; }): string;
+  readFileSync(options: { encoding: string; flag?: string; }): string; // tslint:disable-line unified-signatures
   readFileSync(options?: { flag?: string; }): Buffer;
   readFileSync(options?: any): string | Buffer {
     if (this._content == null) throw new Error("not found");
     const encoding = options == null ? undefined :
       typeof options === "string" ? options :
-      <string | undefined> options.encoding;
+      options.encoding as string | undefined;
     if (encoding) {
-      return (<Buffer> this._content).toString(encoding);
+      return (this._content as Buffer).toString(encoding);
     } else {
-      return <Buffer> this._content;
+      return this._content as Buffer;
     }
   }
 
   readFile(encoding: string): Promise<string>;
-  readFile(options: { encoding: string; flag?: string; }): Promise<string>;
+  readFile(options: { encoding: string; flag?: string; }): Promise<string>; // tslint:disable-line unified-signatures
   readFile(options?: { flag?: string; }): Promise<Buffer>;
   async readFile(
-    arg: undefined | string | { encoding: string; flag?: string; } | { flag?: string; }
+    arg: undefined | string | { encoding: string; flag?: string; } | { flag?: string; },
   ): Promise<string | Buffer> {
     return this.readFileSync(arg as string);
   }

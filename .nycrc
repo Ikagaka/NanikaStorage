@@ -1,23 +1,18 @@
 {
   "include": [
-    "src/**/*.ts"
+    "lib/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "dist"
+    "node_modules"
   ],
   "extension": [
     ".js",
     ".ts"
   ],
-  "require": [
-    "ts-node/register",
-    "babel-register"
-  ],
   "reporter": [
     "lcov",
     "html",
-    "text"
-  ],
-  "all": true
+    "text",
+    "text-summary"
+  ]
 }

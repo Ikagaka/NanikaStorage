@@ -17,6 +17,7 @@
             true,
             "allow-leading-underscore",
             "allow-pascal-case"
-        ]
+        ],
+        "max-classes-per-file": [false]
     }
 }

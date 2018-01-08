@@ -5,22 +5,22 @@
 import {FileSystemObject} from "fso";
 
 import {
-  UkagakaInstallInfo,
-  UkagakaDescriptInfo,
-  UkagakaContainerType,
   UkagakaContainerChildType,
   UkagakaContainerChildTypes,
   UkagakaContainerStandaloneType,
+  UkagakaContainerType,
+  UkagakaDescriptInfo,
+  UkagakaInstallInfo,
 } from "ukagaka-install-descript-info";
 
 import {
-  Profile,
-  NanikaContainerSyncEntry,
   HasNanikaContainerInfoDirectory,
   NanikaBaseDirectory,
   NanikaContainerDirectory,
   NanikaContainerSyncDirectory,
+  NanikaContainerSyncEntry,
   NanikaContainerSyncFile,
+  Profile,
 } from "./nanika-container-directory";
 
 export {
@@ -34,12 +34,12 @@ export {
 };
 
 /** インストール結果 */
-export type NanikaStorageInstallResult = {
+export interface NanikaStorageInstallResult {
   /** インストール先のディレクトリ名 */
-  directory: string,
+  directory: string;
   /** 種類 */
-  type: UkagakaContainerType
-};
+  type: UkagakaContainerType;
+}
 
 /** 伺かベースウェアのルートディレクトリオブジェクト */
 export class NanikaStorage extends NanikaBaseDirectory {
@@ -47,15 +47,15 @@ export class NanikaStorage extends NanikaBaseDirectory {
     const toRemoveChildren = await target.filteredChildrenAll(exceptPaths);
     for (const child of toRemoveChildren.reverse()) {
       if (await child.isDirectory()) {
-        await (<FileSystemObject> child).rmdir();
+        await (child as FileSystemObject).rmdir();
       } else {
-        await (<FileSystemObject> child).unlink();
+        await (child as FileSystemObject).unlink();
       }
     }
   }
 
   private static async _mergeInstallDirectory( // sourceをFileSystemObjectに変換するための苦肉の策
-    source: HasNanikaContainerInfoDirectory | FileSystemObject, target: FileSystemObject, install: UkagakaInstallInfo
+    source: HasNanikaContainerInfoDirectory | FileSystemObject, target: FileSystemObject, install: UkagakaInstallInfo,
   ) {
     if (install.refresh) {
       if (install.refreshundeletemask) {
@@ -73,7 +73,7 @@ export class NanikaStorage extends NanikaBaseDirectory {
         }
       }
     }
-    await target.filteredMergeDirectory(<FileSystemObject> source, childSourceDirectories);
+    await target.filteredMergeDirectory(source as FileSystemObject, childSourceDirectories);
   }
 
   /**
@@ -342,7 +342,7 @@ export class NanikaStorage extends NanikaBaseDirectory {
    * @param type 種類
    * @param dirpath バルーンのディレクトリ名
    */
-  async uninstall(type: "balloon", dirpath: string): Promise<void>;
+  async uninstall(type: "balloon", dirpath: string): Promise<void>; // tslint:disable-line unified-signatures
   /**
    * アンインストールします
    * @param type 種類
@@ -355,30 +355,30 @@ export class NanikaStorage extends NanikaBaseDirectory {
    * @param type 種類
    * @param dirpath プラグインのディレクトリ名
    */
-  async uninstall(type: "plugin", dirpath: string): Promise<void>;
+  async uninstall(type: "plugin", dirpath: string): Promise<void>; // tslint:disable-line unified-signatures
   /**
    * アンインストールします
    * @param type 種類
    * @param dirpath ヘッドラインのディレクトリ名
    */
-  async uninstall(type: "headline", dirpath: string): Promise<void>;
+  async uninstall(type: "headline", dirpath: string): Promise<void>; // tslint:disable-line unified-signatures
   /**
    * アンインストールします
    * @param type 種類
    * @param dirpath カレンダースキンのディレクトリ名
    */
-  async uninstall(type: "calendar.skin", dirpath: string): Promise<void>;
+  async uninstall(type: "calendar.skin", dirpath: string): Promise<void>; // tslint:disable-line unified-signatures
   /**
    * アンインストールします
    * @param type 種類
    * @param dirpath カレンダープラグインのディレクトリ名
    */
-  async uninstall(type: "calendar.plugin", dirpath: string): Promise<void>;
+  async uninstall(type: "calendar.plugin", dirpath: string): Promise<void>; // tslint:disable-line unified-signatures
   async uninstall(type: UkagakaContainerStandaloneType, dirpath: string, shellpath?: string) {
     switch (type) {
       case "ghost": await this.ghost(dirpath).rmAll(); break;
       case "balloon": await this.balloon(dirpath).rmAll(); break;
-      case "shell": await this.shell(dirpath, <string> shellpath).rmAll(); break;
+      case "shell": await this.shell(dirpath, shellpath as string).rmAll(); break;
       case "plugin": await this.plugin(dirpath).rmAll(); break;
       case "headline": await this.headline(dirpath).rmAll(); break;
       case "calendar.skin": await this.calendarSkin(dirpath).rmAll(); break;
@@ -421,7 +421,7 @@ export class NanikaStorage extends NanikaBaseDirectory {
   }
 
   private async _installChild(nar: HasNanikaContainerInfoDirectory, install: UkagakaInstallInfo) {
-    switch (<UkagakaContainerChildType> install.type) {
+    switch (install.type as UkagakaContainerChildType) {
       case "balloon":
         return await this._installBalloon(nar, install);
       case "plugin":
@@ -443,7 +443,7 @@ export class NanikaStorage extends NanikaBaseDirectory {
     const target = this.ghost(targetDirectory);
     await NanikaStorage._mergeInstallDirectory(nar, target, install);
     const childInstallResults = await this._installChildren(nar, install);
-    return <NanikaStorageInstallResult[]> [{directory: targetDirectory, type: "ghost"}].concat(childInstallResults);
+    return [{directory: targetDirectory, type: "ghost"}].concat(childInstallResults) as NanikaStorageInstallResult[];
   }
 
   private async _installShell(nar: HasNanikaContainerInfoDirectory, install: UkagakaInstallInfo, dirpath: string) {
@@ -452,7 +452,7 @@ export class NanikaStorage extends NanikaBaseDirectory {
     const target = this.shell(dirpath, targetDirectory);
     await NanikaStorage._mergeInstallDirectory(nar, target, install);
     const childInstallResults = await this._installChildren(nar, install);
-    return <NanikaStorageInstallResult[]> [{directory: targetDirectory, type: "shell"}].concat(childInstallResults);
+    return [{directory: targetDirectory, type: "shell"}].concat(childInstallResults) as NanikaStorageInstallResult[];
   }
 
   private async _installBalloon(nar: HasNanikaContainerInfoDirectory, install: UkagakaInstallInfo) {
@@ -488,7 +488,7 @@ export class NanikaStorage extends NanikaBaseDirectory {
     if (!install.directory) throw new Error("install.txt directory entry required");
     const targetDirectory = install.directory;
     await NanikaStorage._mergeInstallDirectory(nar, target, install);
-    return <NanikaStorageInstallResult[]> [{directory: targetDirectory, type}];
+    return [{directory: targetDirectory, type}] as NanikaStorageInstallResult[];
   }
 
   private async _installPackage(
@@ -500,7 +500,7 @@ export class NanikaStorage extends NanikaBaseDirectory {
     for (const child of await nar.children()) {
       if (child.isDirectory()) {
         installResults = installResults.concat(
-          await this.install(<HasNanikaContainerInfoDirectory> child, dirpath, sakuraname)
+          await this.install(child as HasNanikaContainerInfoDirectory, dirpath, sakuraname),
         );
       }
     }
@@ -517,7 +517,7 @@ export class NanikaStorage extends NanikaBaseDirectory {
         // *.source.directory,dirを使う
         // そうでなければソースディレクトリは展開後ディレクトリ*.directory,dirと同名として扱う
         const childSourceDirectory = install.child(type).source.directory || childDirectory;
-        const childNar = <HasNanikaContainerInfoDirectory> nar.new(childSourceDirectory);
+        const childNar = nar.new(childSourceDirectory) as HasNanikaContainerInfoDirectory;
         const childInstall = new UkagakaInstallInfo();
         childInstall.type = type;
         childInstall.directory = childDirectory;
