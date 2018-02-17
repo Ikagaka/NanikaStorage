@@ -44,7 +44,7 @@
     "nyc": "^11.4.1",
     "power-assert": "^1.4.4",
     "shx": "^0.2.2",
-    "tslint": "^5.8.0",
+    "tslint": "^5.9.1",
     "typedoc": "^0.10.0",
     "typescript": "^2.6.2"
   },
