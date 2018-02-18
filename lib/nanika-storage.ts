@@ -44,7 +44,13 @@ export interface NanikaStorageInstallResult {
 /** 伺かベースウェアのルートディレクトリオブジェクト */
 export class NanikaStorage extends NanikaBaseDirectory {
   private static async _filterRemove(target: FileSystemObject, exceptPaths: string[]) {
-    const toRemoveChildren = await target.filteredChildrenAll(exceptPaths);
+    let toRemoveChildren: FileSystemObject[];
+    try {
+      toRemoveChildren = await target.filteredChildrenAll(exceptPaths);
+    } catch (error) {
+      if (error.code === "ENOENT") return;
+      throw error;
+    }
     for (const child of toRemoveChildren.reverse()) {
       if (await child.isDirectory()) {
         await (child as FileSystemObject).rmdir();
