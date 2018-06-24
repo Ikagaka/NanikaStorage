@@ -308,8 +308,9 @@ export class NanikaContainerSyncDirectory extends NanikaContainerSyncEntry imple
 
   childrenSync() {
     if (this._childrenCache) return this._childrenCache;
+    const re = new RegExp(`^${this.path}[/\\\\][^/\\\\]+$`);
     this._childrenCache = this._childrenAllCache
-      .filter((child) => !/[\/\\]/.test(child.toString()))
+      .filter((child) => re.test(child.toString()))
       .map((child) => child.isDirectorySync() ? this.new(child.basename().toString()) : child);
     return this._childrenCache;
   }
