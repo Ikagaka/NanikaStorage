@@ -26,7 +26,7 @@
     "doc": "typedoc --mode modules --out doc --readme Readme.md --name \"API Document\" --disableOutputCheck --includeDeclarations --excludeNotExported lib && cd doc && git status && cd .."
   },
   "dependencies": {
-    "fso": "^2.5.15",
+    "fso": "^2.7.0",
     "ukagaka-install-descript-info": "^2.0.0"
   },
   "devDependencies": {
